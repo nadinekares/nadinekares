@@ -1,13 +1,26 @@
 "use client";
 
-import { type ReactNode, useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { type ReactNode, useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "motion/react";
+import Image from "next/image";
 
 const services = [
-  "Creative Direction",
-  "Identity Design",
-  "UI/UX Design",
-  "No-Code & Code Dev",
+  {
+    name: "Creative Direction",
+    image: "/images/services/creative-direction.jpg",
+  },
+  {
+    name: "Identity Design",
+    image: "/images/services/identity-design.jpg",
+  },
+  {
+    name: "UI/UX Design",
+    image: "/images/services/ui-ux-design.jpg",
+  },
+  {
+    name: "No-Code & Code Dev",
+    image: "/images/services/no-code-dev.jpg",
+  },
 ];
 
 function Reveal({
@@ -36,6 +49,8 @@ function Reveal({
 }
 
 export function Services() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <section id="services" className="bg-background px-6 py-24 md:px-10 md:py-32">
       {/* Tag + heading row */}
@@ -58,16 +73,57 @@ export function Services() {
         </div>
       </div>
 
-      {/* Service list — full width */}
-      <div className="mt-12 md:mt-16">
+      {/* Service list with hover image */}
+      <div className="relative mt-12 md:mt-16">
+        {/* Hover image — right side, desktop only */}
+        <div className="pointer-events-none absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 md:block">
+          <AnimatePresence mode="wait">
+            {hoveredIndex !== null && (
+              <motion.div
+                key={hoveredIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="relative h-[320px] w-[420px] overflow-hidden rounded-md lg:h-[380px] lg:w-[500px]"
+              >
+                <Image
+                  src={services[hoveredIndex].image}
+                  alt={services[hoveredIndex].name}
+                  fill
+                  className="object-cover"
+                  sizes="500px"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Service items */}
         {services.map((service, i) => (
-          <Reveal key={service} delay={0.2 + i * 0.1}>
-            <div className="group cursor-pointer py-6 md:py-8">
+          <Reveal key={service.name} delay={0.2 + i * 0.1}>
+            <div
+              className="group cursor-pointer py-6 md:py-8"
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
               <div className="flex items-baseline justify-between">
-                <span className="inline-block font-heading text-3xl leading-none tracking-tight text-muted-foreground transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-4 group-hover:text-foreground md:text-5xl md:group-hover:translate-x-8">
-                  {service}
+                <span
+                  className={`inline-block font-heading text-3xl leading-none tracking-tight transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-4 md:text-5xl md:group-hover:translate-x-8 ${
+                    hoveredIndex === null || hoveredIndex === i
+                      ? "text-muted-foreground group-hover:text-foreground"
+                      : "text-muted-foreground/40"
+                  }`}
+                >
+                  {service.name}
                 </span>
-                <span className="text-xs font-normal text-muted-foreground font-label">
+                <span
+                  className={`text-xs font-normal font-label transition-colors duration-700 ${
+                    hoveredIndex === null || hoveredIndex === i
+                      ? "text-muted-foreground"
+                      : "text-muted-foreground/40"
+                  }`}
+                >
                   ({String(i + 1).padStart(2, "0")})
                 </span>
               </div>

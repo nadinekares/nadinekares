@@ -52,69 +52,72 @@ export function Footer() {
     <footer className="relative w-full bg-black text-white">
       {/* Upper footer content */}
       <div className="px-6 pt-16 pb-12 md:px-10 md:pt-24 md:pb-16">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-          {/* Column 1: Quote */}
-          <div className="md:col-span-1">
+        <div className="flex flex-col justify-between gap-12 md:flex-row">
+          {/* Left: Quote */}
+          <div>
             <p className="text-lg leading-snug text-white/70 md:text-xl">
               Catching clicks,<br />
               crafting pixels.
             </p>
           </div>
 
-          {/* Column 2: Pages */}
-          <div>
-            <p className="text-sm font-label uppercase tracking-[0.1em] text-white/50">
-              Pages
-            </p>
-            <ul className="mt-3 flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
+          {/* Right: Pages + Get in Touch */}
+          <div className="flex gap-16 sm:gap-20 md:gap-28 lg:gap-36">
+            {/* Pages */}
+            <div>
+              <p className="text-sm font-label uppercase tracking-[0.1em] text-white/50">
+                Pages
+              </p>
+              <ul className="mt-3 flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-white/70 transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Get in Touch */}
+            <div>
+              <p className="text-sm font-label uppercase tracking-[0.1em] text-white/50">
+                Get in Touch
+              </p>
+              <ul className="mt-3 flex flex-col gap-2">
+                <li>
+                  <a
+                    href="mailto:hello@nadinekares.com"
                     className="text-sm text-white/70 transition-colors hover:text-white"
                   >
-                    {link.label}
-                  </Link>
+                    hello@nadinekares.com
+                  </a>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Get in touch */}
-          <div>
-            <p className="text-sm font-label uppercase tracking-[0.1em] text-white/50">
-              Get in Touch
-            </p>
-            <ul className="mt-3 flex flex-col gap-2">
-              <li>
-                <a
-                  href="mailto:hello@nadinekares.com"
-                  className="text-sm text-white/70 transition-colors hover:text-white"
-                >
-                  hello@nadinekares.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/nadinekares"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-white/70 transition-colors hover:text-white"
-                >
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/nadinekares"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-white/70 transition-colors hover:text-white"
-                >
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
+                <li>
+                  <a
+                    href="https://www.instagram.com/nadinekares"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white/70 transition-colors hover:text-white"
+                  >
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/nadinekares"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white/70 transition-colors hover:text-white"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
