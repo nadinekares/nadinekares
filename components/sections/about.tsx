@@ -24,7 +24,7 @@ const bioLines = [
 ];
 
 const aboutImages = [
-  { src: "/images/Nadine Kares_about-image-01.jpg", alt: "Studio work — brand identity", ratio: 3 / 4, logo: "/images/Logo_Talentir.svg", logoClass: "h-6 md:h-7", href: "https://www.talentir.com" },
+  { src: "/images/Nadine Kares_about-image-01.jpg", alt: "Studio work — brand identity", ratio: 3 / 4, logo: "/images/Logo_Talentir.svg", logoClass: "h-5 md:h-6", href: "https://www.talentir.com" },
   { src: "/images/Nadine Kares_about-image-02.jpeg", alt: "Studio work — web design", ratio: 3 / 2.8, logo: "/images/Logo_Hotelpartner.svg", logoClass: "h-10 md:h-12", href: "https://hotelpartner.com/de/b-e-quick/" },
   { src: "/images/Nadine Kares_about-image-03.jpeg", alt: "Studio work — visual direction", ratio: 3 / 2, logo: "/images/Logo_Janet Brantschen.svg", logoClass: "h-5 md:h-6 max-w-[65%]", href: "https://www.janetbrantschen.com" },
   { src: "/images/Nadine Kares_about-image-04.jpeg", alt: "Studio work — creative process", ratio: 3 / 1.4, logo: "/images/Logo_Bluecode.svg", logoClass: "h-7 md:h-9", href: "https://www.bluecode.com" },
