@@ -22,8 +22,8 @@ export function Cta() {
       const vp = 1 - rect.top / windowH;
       setImageProgress(Math.max(0, Math.min(1, vp)));
 
-      // Phase 2: Text animation — after image is full, section top goes from 0 to -windowH
-      const tp = -rect.top / windowH;
+      // Phase 2: Text animation — starts when section is halfway up the viewport
+      const tp = (windowH * 0.5 - rect.top) / (windowH * 0.5);
       setTextProgress(Math.max(0, Math.min(1, tp)));
     };
 
@@ -36,10 +36,13 @@ export function Cta() {
   const scale = 0.75 + imageProgress * 0.25;
   const radius = (1 - imageProgress) * 24;
 
+  // Ease-out curve: fast entry, smooth deceleration
+  const eased = 1 - Math.pow(1 - textProgress, 3);
+
   // Text: opacity 0 → 1, scale 75% → 100%, translateY from bottom to center
-  const textOpacity = textProgress;
-  const textScale = 0.75 + textProgress * 0.25;
-  const textTranslateY = (1 - textProgress) * 35;
+  const textOpacity = eased;
+  const textScale = 0.75 + eased * 0.25;
+  const textTranslateY = (1 - eased) * 35;
 
   return (
     <section
@@ -54,7 +57,6 @@ export function Cta() {
           style={{
             transform: `scale(${scale})`,
             borderRadius: `${radius}px`,
-            filter: `grayscale(${textProgress})`,
           }}
         >
           <MeshGradient
@@ -63,14 +65,8 @@ export function Cta() {
             swirl={0}
             grainMixer={0}
             grainOverlay={0}
-            colors={["#BDB2C8", "#F49468"]}
+            colors={["#D4B0C0", "#D4421A"]}
             style={{ width: "100%", height: "100%" }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundColor: `rgba(0, 0, 0, ${0.4 + textProgress * 0.15})`,
-            }}
           />
         </div>
 

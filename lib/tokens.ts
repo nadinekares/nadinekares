@@ -71,6 +71,7 @@ export const themeColors: ColorToken[] = [
   { name: "border", cssVar: "var(--border)", twClass: "bg-border", value: "oklch(0.922 0 0)" },
   { name: "input", cssVar: "var(--input)", twClass: "bg-input", value: "oklch(0.922 0 0)" },
   { name: "ring", cssVar: "var(--ring)", twClass: "bg-ring", value: "oklch(0.708 0 0)" },
+  { name: "brand", cssVar: "var(--brand)", twClass: "bg-brand", value: "oklch(0.53 0.185 33)" },
 ];
 
 export const chartColors: ColorToken[] = [
@@ -271,6 +272,7 @@ export function isDarkSwatch(name: string): boolean {
     name === "sidebar-foreground" ||
     name === "sidebar-primary" ||
     name === "sidebar-accent-foreground" ||
-    name.includes("chart")
+    name.includes("chart") ||
+    name === "brand"
   );
 }

@@ -65,7 +65,9 @@ export function HeroVariantB() {
               Selected Work
             </a>
             <a
-              href="#contact"
+              href="https://cal.com/nadine-kares-design"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm uppercase tracking-[0.2em] text-muted-foreground transition-colors duration-300 hover:text-foreground"
             >
               Get in Touch

@@ -16,7 +16,9 @@ export function HeroVariantC() {
           Design Studio
         </span>
         <a
-          href="#contact"
+          href="https://cal.com/nadine-kares-design"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground transition-colors duration-300 hover:text-background"
         >
           Contact

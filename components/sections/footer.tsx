@@ -7,7 +7,7 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Portfolio", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "https://cal.com/nadine-kares-design" },
 ];
 
 const legalLinks = [
@@ -71,12 +71,23 @@ export function Footer() {
               <ul className="mt-3 flex flex-col gap-2">
                 {navLinks.map((link) => (
                   <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/70 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </Link>
+                    {link.href.startsWith("http") ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-white/70 transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-white/70 transition-colors hover:text-white"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -90,15 +101,15 @@ export function Footer() {
               <ul className="mt-3 flex flex-col gap-2">
                 <li>
                   <a
-                    href="mailto:hello@nadinekares.com"
+                    href="mailto:design@nadinekares.com"
                     className="text-sm text-white/70 transition-colors hover:text-white"
                   >
-                    hello@nadinekares.com
+                    design@nadinekares.com
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://www.instagram.com/nadinekares"
+                    href="https://www.instagram.com/piz_nadjini/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-white/70 transition-colors hover:text-white"
@@ -108,12 +119,22 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.linkedin.com/in/nadinekares"
+                    href="https://www.linkedin.com/in/nadine-brantschen/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-white/70 transition-colors hover:text-white"
                   >
                     LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://soundcloud.com/piznadjini"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white/70 transition-colors hover:text-white"
+                  >
+                    SoundCloud
                   </a>
                 </li>
               </ul>
