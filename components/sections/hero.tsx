@@ -109,8 +109,8 @@ export function Hero() {
       current.x += (target.x - current.x) * ease;
       current.y += (target.y - current.y) * ease;
 
-      lens.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`;
-      lensImg.style.transform = `translate3d(${-current.x}px, ${-current.y}px, 0)`;
+      lens!.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`;
+      lensImg!.style.transform = `translate3d(${-current.x}px, ${-current.y}px, 0)`;
 
       if (
         Math.abs(target.x - current.x) > 0.1 ||
@@ -127,8 +127,8 @@ export function Hero() {
       const x = e.clientX - sectionRect.left;
       const y = e.clientY - sectionRect.top;
 
-      const w = lens.offsetWidth;
-      const h = lens.offsetHeight;
+      const w = lens!.offsetWidth;
+      const h = lens!.offsetHeight;
       target.x = x - w / 2;
       target.y = y - h / 2;
 
@@ -152,15 +152,15 @@ export function Hero() {
         const sectionRect = section.getBoundingClientRect();
         const x = e.clientX - sectionRect.left;
         const y = e.clientY - sectionRect.top;
-        const w = lens.offsetWidth;
-        const h = lens.offsetHeight;
+        const w = lens!.offsetWidth;
+        const h = lens!.offsetHeight;
         current.x = x - w / 2;
         current.y = y - h / 2;
         target.x = current.x;
         target.y = current.y;
 
-        lens.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`;
-        lensImg.style.transform = `translate3d(${-current.x}px, ${-current.y}px, 0)`;
+        lens!.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`;
+        lensImg!.style.transform = `translate3d(${-current.x}px, ${-current.y}px, 0)`;
       }
       setLensVisible(true);
     };
