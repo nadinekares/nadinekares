@@ -62,6 +62,13 @@ function Reveal({
 
 export function Services() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [tilt, setTilt] = useState(0);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width; // 0 → 1
+    setTilt((x - 0.5) * 16); // −8° to +8°
+  }
 
   return (
     <section id="services" className="bg-background px-6 py-24 md:px-10 md:py-32">
@@ -92,14 +99,16 @@ export function Services() {
             <div
               className="group relative cursor-pointer py-6 md:py-8"
               onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              onMouseLeave={() => { setHoveredIndex(null); setTilt(0); }}
+              onMouseMove={handleMouseMove}
             >
               {/* Hover image — centered on this row, desktop only */}
               {hoveredIndex === i && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0.95, rotate: 0 }}
+                  animate={{ opacity: 1, scale: 1, rotate: tilt }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ transformOrigin: "bottom right" }}
                   className="pointer-events-none absolute right-[10%] top-1/2 z-10 hidden h-[380px] w-[280px] -translate-y-1/2 overflow-hidden rounded-md md:block lg:right-[12%] lg:h-[440px] lg:w-[320px]"
                 >
                   <Image
