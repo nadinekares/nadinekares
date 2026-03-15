@@ -56,11 +56,8 @@ export function Footer() {
           {/* Column 1: Quote */}
           <div className="md:col-span-1">
             <p className="text-lg leading-snug text-white/70 md:text-xl">
-              &ldquo;Good design is obvious.<br />
-              Great design is transparent.&rdquo;
-            </p>
-            <p className="mt-3 text-xs font-label uppercase tracking-[0.1em] text-white/40">
-              — Joe Sparano
+              Catching clicks,<br />
+              crafting pixels.
             </p>
           </div>
 

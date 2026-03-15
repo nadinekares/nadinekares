@@ -62,10 +62,16 @@ export function Services() {
       <div className="mt-12 md:mt-16">
         {services.map((service, i) => (
           <Reveal key={service} delay={0.2 + i * 0.1}>
-            <div className="border-t border-muted py-6 md:py-8">
-              <span className="font-heading text-3xl leading-none tracking-tight text-foreground md:text-5xl">
-                {service}
-              </span>
+            <div className="group cursor-pointer py-6 md:py-8">
+              <div className="flex items-baseline justify-between">
+                <span className="inline-block font-heading text-3xl leading-none tracking-tight text-muted-foreground transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-4 group-hover:text-foreground md:text-5xl md:group-hover:translate-x-8">
+                  {service}
+                </span>
+                <span className="text-xs font-normal text-muted-foreground font-label">
+                  ({String(i + 1).padStart(2, "0")})
+                </span>
+              </div>
+              <div className="mt-6 h-px w-full bg-foreground/20 md:mt-8" />
             </div>
           </Reveal>
         ))}
