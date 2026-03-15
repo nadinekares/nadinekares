@@ -17,12 +17,10 @@ const stats = [
 ];
 
 const bioLines = [
-  "Nadine Kares is a creative studio specializing",
-  "in brand identity and web design. Based between",
-  "Vienna and Zurich, we craft distinctive visual",
-  "experiences that connect brands with their",
-  "audience — with precision, clarity, and a",
-  "sharp eye for detail.",
+  "Nadine Kares is a creative studio specializing in brand identity",
+  "and web design. Based between Vienna and Zurich, we craft distinctive",
+  "visual experiences that connect brands with their audience —",
+  "with precision, clarity, and a sharp eye for detail.",
 ];
 
 const aboutImages = [
@@ -162,10 +160,10 @@ export function About() {
         </Reveal>
 
         {/* Right — bio + stats */}
-        <div className="md:col-span-8 md:col-start-5">
+        <div className="md:col-span-9 md:col-start-4">
           <LineByLineReveal
             lines={bioLines}
-            className="max-w-2xl text-xl leading-relaxed text-foreground md:text-2xl"
+            className="text-xl leading-relaxed text-foreground md:text-2xl"
             baseDelay={0.1}
             stagger={0.08}
           />
