@@ -1,7 +1,7 @@
 "use client";
 
-import { type ReactNode, useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "motion/react";
+import { type ReactNode, useRef, useState, useEffect } from "react";
+import { motion, useInView } from "motion/react";
 import Image from "next/image";
 
 const services = [
@@ -34,9 +34,21 @@ function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
+  const [animationDone, setAnimationDone] = useState(false);
+
+  useEffect(() => {
+    if (inView) {
+      const timeout = setTimeout(() => setAnimationDone(true), (delay + 0.7) * 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [inView, delay]);
 
   return (
-    <div ref={ref} className={className} style={{ overflow: "hidden" }}>
+    <div
+      ref={ref}
+      className={className}
+      style={{ overflow: animationDone ? "visible" : "hidden" }}
+    >
       <motion.div
         initial={{ y: "100%" }}
         animate={inView ? { y: 0 } : { y: "100%" }}
@@ -73,40 +85,33 @@ export function Services() {
         </div>
       </div>
 
-      {/* Service list with hover image */}
-      <div className="relative mt-12 md:mt-16">
-        {/* Hover image — right side, desktop only */}
-        <div className="pointer-events-none absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 md:block">
-          <AnimatePresence mode="wait">
-            {hoveredIndex !== null && (
-              <motion.div
-                key={hoveredIndex}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="relative h-[320px] w-[420px] overflow-hidden rounded-md lg:h-[380px] lg:w-[500px]"
-              >
-                <Image
-                  src={services[hoveredIndex].image}
-                  alt={services[hoveredIndex].name}
-                  fill
-                  className="object-cover"
-                  sizes="500px"
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Service items */}
+      {/* Service list */}
+      <div className="mt-12 md:mt-16">
         {services.map((service, i) => (
           <Reveal key={service.name} delay={0.2 + i * 0.1}>
             <div
-              className="group cursor-pointer py-6 md:py-8"
+              className="group relative cursor-pointer py-6 md:py-8"
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
+              {/* Hover image — centered on this row, desktop only */}
+              {hoveredIndex === i && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="pointer-events-none absolute right-[10%] top-1/2 z-10 hidden h-[380px] w-[280px] -translate-y-1/2 overflow-hidden rounded-md md:block lg:right-[12%] lg:h-[440px] lg:w-[320px]"
+                >
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    fill
+                    className="object-cover"
+                    sizes="320px"
+                  />
+                </motion.div>
+              )}
+
               <div className="flex items-baseline justify-between">
                 <span
                   className={`inline-block font-heading text-3xl leading-none tracking-tight transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-4 md:text-5xl md:group-hover:translate-x-8 ${
