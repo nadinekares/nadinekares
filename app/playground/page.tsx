@@ -17,12 +17,8 @@ export default function PlaygroundPage() {
           <div className="mb-1 inline-block rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
             Dev Only
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Playground
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Hero section drafts for Nadine Kares
-          </p>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">Playground</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Hero section drafts for Nadine Kares</p>
         </div>
       </div>
 

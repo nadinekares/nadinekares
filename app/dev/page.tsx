@@ -44,9 +44,7 @@ function DevInner() {
               >
                 /dev?section={key}
               </a>
-              <span className="ml-3 text-sm text-muted-foreground">
-                {label}
-              </span>
+              <span className="ml-3 text-sm text-muted-foreground">{label}</span>
             </li>
           ))}
         </ul>
@@ -81,9 +79,7 @@ function DevInner() {
           <div className="inline-block rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
             Dev Only
           </div>
-          <span className="font-heading text-sm font-medium text-foreground">
-            {entry.label}
-          </span>
+          <span className="font-heading text-sm font-medium text-foreground">{entry.label}</span>
           <a
             href="/dev"
             className="ml-auto text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"

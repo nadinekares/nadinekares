@@ -8,10 +8,7 @@ export const metadata = {
 };
 
 export default function ImprintPage() {
-  const content = fs.readFileSync(
-    path.join(process.cwd(), "content", "imprint.md"),
-    "utf-8"
-  );
+  const content = fs.readFileSync(path.join(process.cwd(), "content", "imprint.md"), "utf-8");
 
   return <LegalPage content={content} backLabel="Back" />;
 }

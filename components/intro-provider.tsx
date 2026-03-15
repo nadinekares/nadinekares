@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 
 export type IntroPhase = "image" | "viewfinder" | "reveal" | "done";
@@ -49,7 +43,5 @@ export function IntroProvider({ children }: { children: ReactNode }) {
     return () => timers.forEach(clearTimeout);
   }, [isHome]);
 
-  return (
-    <IntroContext.Provider value={phase}>{children}</IntroContext.Provider>
-  );
+  return <IntroContext.Provider value={phase}>{children}</IntroContext.Provider>;
 }

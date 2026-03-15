@@ -105,13 +105,7 @@ export function LegalPage({
             href="/"
             className="mb-12 inline-flex items-center gap-2 text-sm font-label uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              className="rotate-180"
-            >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="rotate-180">
               <path
                 d="M6 3l5 5-5 5"
                 stroke="currentColor"
@@ -170,10 +164,7 @@ export function LegalPage({
                 case "p":
                 default:
                   return (
-                    <p
-                      key={i}
-                      className="text-[15px] leading-relaxed text-muted-foreground"
-                    >
+                    <p key={i} className="text-[15px] leading-relaxed text-muted-foreground">
                       {renderInlineMarkdown(el.content)}
                     </p>
                   );

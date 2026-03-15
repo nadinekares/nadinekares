@@ -39,22 +39,12 @@ import {
 function SectionHeader({ title, id }: { title: string; id: string }) {
   return (
     <div id={id} className="scroll-mt-24 border-b border-border pb-3">
-      <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-        {title}
-      </h2>
+      <h2 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h2>
     </div>
   );
 }
 
-function ColorSwatch({
-  name,
-  cssVar,
-  twClass,
-}: {
-  name: string;
-  cssVar: string;
-  twClass: string;
-}) {
+function ColorSwatch({ name, cssVar, twClass }: { name: string; cssVar: string; twClass: string }) {
   return (
     <div className="flex flex-col gap-2">
       <div
@@ -75,9 +65,7 @@ export default function StyleguidePage() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-6xl items-center gap-8 overflow-x-auto px-6 py-4">
-          <h1 className="shrink-0 text-lg font-bold tracking-tight text-foreground">
-            Styleguide
-          </h1>
+          <h1 className="shrink-0 text-lg font-bold tracking-tight text-foreground">Styleguide</h1>
           <div className="flex gap-6 text-sm">
             {[
               "Colors",
@@ -109,51 +97,30 @@ export default function StyleguidePage() {
 
           {/* Theme Colors */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-foreground">
-              Theme Colors
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Theme Colors</h3>
             <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6">
               {themeColors.map((c) => (
-                <ColorSwatch
-                  key={c.name}
-                  name={c.name}
-                  cssVar={c.cssVar}
-                  twClass={c.twClass}
-                />
+                <ColorSwatch key={c.name} name={c.name} cssVar={c.cssVar} twClass={c.twClass} />
               ))}
             </div>
           </div>
 
           {/* Chart Colors */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-foreground">
-              Chart Colors
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Chart Colors</h3>
             <div className="grid grid-cols-5 gap-4">
               {chartColors.map((c) => (
-                <ColorSwatch
-                  key={c.name}
-                  name={c.name}
-                  cssVar={c.cssVar}
-                  twClass={c.twClass}
-                />
+                <ColorSwatch key={c.name} name={c.name} cssVar={c.cssVar} twClass={c.twClass} />
               ))}
             </div>
           </div>
 
           {/* Sidebar Colors */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-foreground">
-              Sidebar Colors
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Sidebar Colors</h3>
             <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6">
               {sidebarColors.map((c) => (
-                <ColorSwatch
-                  key={c.name}
-                  name={c.name}
-                  cssVar={c.cssVar}
-                  twClass={c.twClass}
-                />
+                <ColorSwatch key={c.name} name={c.name} cssVar={c.cssVar} twClass={c.twClass} />
               ))}
             </div>
           </div>
@@ -165,9 +132,7 @@ export default function StyleguidePage() {
 
           {/* Font Families — auto-generated from tokens */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Font Families
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Font Families</h3>
             <div className="grid gap-6 md:grid-cols-2">
               {fonts.map((f) => (
                 <div key={f.twClass} className="rounded-lg border border-border p-6">
@@ -178,8 +143,7 @@ export default function StyleguidePage() {
                     The quick brown fox jumps over the lazy dog
                   </p>
                   <p className={`mt-2 ${f.twClass} text-sm text-muted-foreground`}>
-                    ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz
-                    0123456789
+                    ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789
                   </p>
                 </div>
               ))}
@@ -201,9 +165,7 @@ export default function StyleguidePage() {
                   <span className="w-32 shrink-0 font-heading text-xs text-muted-foreground">
                     {item.size}
                   </span>
-                  <span className={`${item.cls} text-foreground`}>
-                    The quick brown fox
-                  </span>
+                  <span className={`${item.cls} text-foreground`}>The quick brown fox</span>
                 </div>
               ))}
             </div>
@@ -211,9 +173,7 @@ export default function StyleguidePage() {
 
           {/* Font Weights — auto-generated from tokens */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Font Weights
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Font Weights</h3>
             <div className="space-y-3 rounded-lg border border-border p-6">
               {fontWeights.map((item) => (
                 <div
@@ -236,9 +196,7 @@ export default function StyleguidePage() {
 
           {/* Heading Hierarchy — auto-generated from tokens */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Heading Hierarchy
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Heading Hierarchy</h3>
             <div className="space-y-6 rounded-lg border border-border p-6">
               {headingHierarchy.map((item) => (
                 <div key={item.tag}>
@@ -255,18 +213,14 @@ export default function StyleguidePage() {
 
           {/* Typography Styles — auto-generated from tokens */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Typography Styles
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Typography Styles</h3>
             <div className="space-y-6 rounded-lg border border-border p-6">
               {typographyStyles.map((item) => (
                 <div key={item.name}>
                   <p className="mb-1 font-heading text-xs text-muted-foreground">
                     {item.name} &mdash; {item.description}
                   </p>
-                  <p className={`${item.cls} text-foreground`}>
-                    {item.name} Sample
-                  </p>
+                  <p className={`${item.cls} text-foreground`}>{item.name} Sample</p>
                 </div>
               ))}
             </div>
@@ -274,9 +228,7 @@ export default function StyleguidePage() {
 
           {/* Tracking — auto-generated from tokens */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Letter Spacing (Tracking)
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Letter Spacing (Tracking)</h3>
             <div className="space-y-3 rounded-lg border border-border p-6">
               {trackingValues.map((item) => (
                 <div
@@ -299,21 +251,16 @@ export default function StyleguidePage() {
 
           {/* Leading — auto-generated from tokens */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Line Height (Leading)
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Line Height (Leading)</h3>
             <div className="grid gap-4 md:grid-cols-3">
               {leadingValues.map((item) => (
-                <div
-                  key={item.cls}
-                  className="rounded-lg border border-border p-4"
-                >
+                <div key={item.cls} className="rounded-lg border border-border p-4">
                   <p className="mb-2 font-heading text-xs text-muted-foreground">
                     {item.label} ({item.val})
                   </p>
                   <p className={`${item.cls} text-sm text-foreground`}>
-                    The quick brown fox jumps over the lazy dog. Pack my box
-                    with five dozen liquor jugs.
+                    The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor
+                    jugs.
                   </p>
                 </div>
               ))}
@@ -327,9 +274,7 @@ export default function StyleguidePage() {
 
           {/* Variants */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Button Variants
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Button Variants</h3>
             <div className="flex flex-wrap items-center gap-3">
               <Button variant="default">Default</Button>
               <Button variant="secondary">Secondary</Button>
@@ -339,15 +284,16 @@ export default function StyleguidePage() {
               <Button variant="link">Link</Button>
             </div>
             <div className="rounded-lg border border-border p-4 font-heading text-xs text-muted-foreground">
-              <p>&lt;Button variant=&quot;default | secondary | outline | ghost | destructive | link&quot;&gt;</p>
+              <p>
+                &lt;Button variant=&quot;default | secondary | outline | ghost | destructive |
+                link&quot;&gt;
+              </p>
             </div>
           </div>
 
           {/* Sizes */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Button Sizes
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Button Sizes</h3>
             <div className="flex flex-wrap items-center gap-3">
               <Button size="xs">Extra Small</Button>
               <Button size="sm">Small</Button>
@@ -361,9 +307,7 @@ export default function StyleguidePage() {
 
           {/* With Icons */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Buttons with Icons
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Buttons with Icons</h3>
             <div className="flex flex-wrap items-center gap-3">
               <Button>
                 <Mail data-icon="inline-start" />
@@ -386,9 +330,7 @@ export default function StyleguidePage() {
 
           {/* Icon-Only */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Icon-Only Buttons
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Icon-Only Buttons</h3>
             <div className="flex flex-wrap items-center gap-3">
               <Button size="icon-xs" variant="outline">
                 <Plus />
@@ -410,9 +352,7 @@ export default function StyleguidePage() {
 
           {/* States */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Button States
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Button States</h3>
             <div className="flex flex-wrap items-center gap-3">
               <Button>Normal</Button>
               <Button disabled>Disabled</Button>
@@ -435,12 +375,8 @@ export default function StyleguidePage() {
                   <span className="w-8 shrink-0 text-right font-heading text-xs text-muted-foreground">
                     {item.label}
                   </span>
-                  <div
-                    className={`${item.twClass} h-4 rounded-sm bg-primary`}
-                  />
-                  <span className="font-heading text-xs text-muted-foreground">
-                    {item.value}
-                  </span>
+                  <div className={`${item.twClass} h-4 rounded-sm bg-primary`} />
+                  <span className="font-heading text-xs text-muted-foreground">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -448,9 +384,7 @@ export default function StyleguidePage() {
 
           {/* Padding Demo — auto-generated from tokens */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Padding Examples
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Padding Examples</h3>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
               {paddingExamples.map((item) => (
                 <div key={item.cls} className="rounded-lg border border-border">
@@ -466,15 +400,11 @@ export default function StyleguidePage() {
 
           {/* Gap Demo — auto-generated from tokens */}
           <div className="space-y-6">
-            <h3 className="text-lg font-medium text-foreground">
-              Gap Examples (Flex)
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Gap Examples (Flex)</h3>
             <div className="space-y-4">
               {gapExamples.map((item) => (
                 <div key={item.cls}>
-                  <p className="mb-2 font-heading text-xs text-muted-foreground">
-                    {item.label}
-                  </p>
+                  <p className="mb-2 font-heading text-xs text-muted-foreground">{item.label}</p>
                   <div className={`flex ${item.cls}`}>
                     {[1, 2, 3, 4].map((n) => (
                       <div
@@ -500,12 +430,8 @@ export default function StyleguidePage() {
                 <div
                   className={`${item.twClass} flex h-20 w-20 items-center justify-center border-2 border-primary bg-primary/10`}
                 />
-                <span className="font-heading text-xs text-muted-foreground">
-                  {item.label}
-                </span>
-                <span className="font-heading text-[10px] text-muted-foreground/60">
-                  {item.px}
-                </span>
+                <span className="font-heading text-xs text-muted-foreground">{item.label}</span>
+                <span className="font-heading text-[10px] text-muted-foreground/60">{item.px}</span>
               </div>
             ))}
           </div>
@@ -519,9 +445,7 @@ export default function StyleguidePage() {
           <div className="space-y-6">
             {gridColumns.map((cols) => (
               <div key={cols}>
-                <p className="mb-2 font-heading text-xs text-muted-foreground">
-                  grid-cols-{cols}
-                </p>
+                <p className="mb-2 font-heading text-xs text-muted-foreground">grid-cols-{cols}</p>
                 <div
                   className="grid gap-2"
                   style={{
@@ -543,9 +467,7 @@ export default function StyleguidePage() {
 
           {/* Responsive Grid */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-foreground">
-              Responsive Grid Example
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Responsive Grid Example</h3>
             <p className="font-heading text-xs text-muted-foreground">
               grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
             </p>
@@ -563,15 +485,11 @@ export default function StyleguidePage() {
 
           {/* Max Width — auto-generated from tokens */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-foreground">
-              Container Max Widths
-            </h3>
+            <h3 className="text-lg font-medium text-foreground">Container Max Widths</h3>
             <div className="space-y-3">
               {containerWidths.map((item) => (
                 <div key={item.cls}>
-                  <div
-                    className={`${item.cls} h-6 rounded bg-primary/10`}
-                  />
+                  <div className={`${item.cls} h-6 rounded bg-primary/10`} />
                   <span className="font-heading text-xs text-muted-foreground">
                     {item.label} &mdash; {item.size}
                   </span>
@@ -587,28 +505,31 @@ export default function StyleguidePage() {
 
           <div className="space-y-6 rounded-lg border border-border p-6">
             <div className="space-y-2">
-              <p className="font-heading text-xs text-muted-foreground">
-                Default link
-              </p>
-              <a href="#" className="text-primary underline underline-offset-4 hover:text-primary/80">
+              <p className="font-heading text-xs text-muted-foreground">Default link</p>
+              <a
+                href="#"
+                className="text-primary underline underline-offset-4 hover:text-primary/80"
+              >
                 This is a default link
               </a>
             </div>
             <div className="space-y-2">
-              <p className="font-heading text-xs text-muted-foreground">
-                Muted link
-              </p>
-              <a href="#" className="text-muted-foreground underline underline-offset-4 hover:text-foreground">
+              <p className="font-heading text-xs text-muted-foreground">Muted link</p>
+              <a
+                href="#"
+                className="text-muted-foreground underline underline-offset-4 hover:text-foreground"
+              >
                 This is a muted link
               </a>
             </div>
             <div className="space-y-2">
-              <p className="font-heading text-xs text-muted-foreground">
-                Inline link in paragraph
-              </p>
+              <p className="font-heading text-xs text-muted-foreground">Inline link in paragraph</p>
               <p className="text-foreground">
                 This is a paragraph with an{" "}
-                <a href="#" className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">
+                <a
+                  href="#"
+                  className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+                >
                   inline link
                 </a>{" "}
                 embedded within the text content.
@@ -637,8 +558,8 @@ export default function StyleguidePage() {
 
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Icons via <span className="font-heading">lucide-react</span>. Default
-              size is 16px (size-4) inside buttons.
+              Icons via <span className="font-heading">lucide-react</span>. Default size is 16px
+              (size-4) inside buttons.
             </p>
             <div className="grid grid-cols-4 gap-4 sm:grid-cols-6 md:grid-cols-8">
               {[
@@ -658,17 +579,13 @@ export default function StyleguidePage() {
                   className="flex flex-col items-center gap-2 rounded-lg border border-border p-3"
                 >
                   <Icon className="size-5 text-foreground" />
-                  <span className="font-heading text-[10px] text-muted-foreground">
-                    {name}
-                  </span>
+                  <span className="font-heading text-[10px] text-muted-foreground">{name}</span>
                 </div>
               ))}
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-lg font-medium text-foreground">
-                Icon Sizes
-              </h3>
+              <h3 className="text-lg font-medium text-foreground">Icon Sizes</h3>
               <div className="flex items-end gap-6">
                 {[
                   { cls: "size-3", label: "size-3 (12px)" },
@@ -677,10 +594,7 @@ export default function StyleguidePage() {
                   { cls: "size-6", label: "size-6 (24px)" },
                   { cls: "size-8", label: "size-8 (32px)" },
                 ].map((item) => (
-                  <div
-                    key={item.cls}
-                    className="flex flex-col items-center gap-2"
-                  >
+                  <div key={item.cls} className="flex flex-col items-center gap-2">
                     <Heart className={`${item.cls} text-foreground`} />
                     <span className="font-heading text-[10px] text-muted-foreground">
                       {item.label}
@@ -699,9 +613,7 @@ export default function StyleguidePage() {
           <div className="grid gap-8 md:grid-cols-2">
             {/* Input */}
             <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">
-                Text Input
-              </label>
+              <label className="text-sm font-medium text-foreground">Text Input</label>
               <input
                 type="text"
                 placeholder="Placeholder text..."
@@ -714,9 +626,7 @@ export default function StyleguidePage() {
 
             {/* Disabled Input */}
             <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">
-                Disabled Input
-              </label>
+              <label className="text-sm font-medium text-foreground">Disabled Input</label>
               <input
                 type="text"
                 placeholder="Disabled..."
@@ -727,9 +637,7 @@ export default function StyleguidePage() {
 
             {/* Textarea */}
             <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">
-                Textarea
-              </label>
+              <label className="text-sm font-medium text-foreground">Textarea</label>
               <textarea
                 placeholder="Type your message..."
                 rows={3}
@@ -739,9 +647,7 @@ export default function StyleguidePage() {
 
             {/* Select */}
             <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">
-                Select
-              </label>
+              <label className="text-sm font-medium text-foreground">Select</label>
               <select className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm text-foreground shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
                 <option>Option 1</option>
                 <option>Option 2</option>
@@ -751,9 +657,7 @@ export default function StyleguidePage() {
 
             {/* Checkbox */}
             <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">
-                Checkbox
-              </label>
+              <label className="text-sm font-medium text-foreground">Checkbox</label>
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -765,9 +669,7 @@ export default function StyleguidePage() {
 
             {/* Radio */}
             <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">
-                Radio Buttons
-              </label>
+              <label className="text-sm font-medium text-foreground">Radio Buttons</label>
               <div className="flex flex-col gap-2">
                 <label className="flex items-center gap-2">
                   <input
@@ -779,11 +681,7 @@ export default function StyleguidePage() {
                   <span className="text-sm text-foreground">Option A</span>
                 </label>
                 <label className="flex items-center gap-2">
-                  <input
-                    type="radio"
-                    name="radio-demo"
-                    className="size-4 accent-primary"
-                  />
+                  <input type="radio" name="radio-demo" className="size-4 accent-primary" />
                   <span className="text-sm text-foreground">Option B</span>
                 </label>
               </div>
@@ -800,9 +698,7 @@ export default function StyleguidePage() {
                 key={item.cls}
                 className={`${item.cls} flex h-24 items-center justify-center rounded-lg border border-border bg-card`}
               >
-                <span className="font-heading text-xs text-muted-foreground">
-                  {item.label}
-                </span>
+                <span className="font-heading text-xs text-muted-foreground">{item.label}</span>
               </div>
             ))}
           </div>
@@ -814,13 +710,8 @@ export default function StyleguidePage() {
           <div className="flex gap-3">
             {opacityScale.map((val) => (
               <div key={val} className="flex flex-col items-center gap-2">
-                <div
-                  className="h-16 w-16 rounded-lg bg-primary"
-                  style={{ opacity: val / 100 }}
-                />
-                <span className="font-heading text-xs text-muted-foreground">
-                  {val}%
-                </span>
+                <div className="h-16 w-16 rounded-lg bg-primary" style={{ opacity: val / 100 }} />
+                <span className="font-heading text-xs text-muted-foreground">{val}%</span>
               </div>
             ))}
           </div>
@@ -835,9 +726,7 @@ export default function StyleguidePage() {
                 key={item.label}
                 className={`${item.cls} border-border flex h-16 items-center justify-center rounded-lg bg-card`}
               >
-                <span className="font-heading text-xs text-muted-foreground">
-                  {item.label}
-                </span>
+                <span className="font-heading text-xs text-muted-foreground">{item.label}</span>
               </div>
             ))}
           </div>
@@ -846,8 +735,8 @@ export default function StyleguidePage() {
         {/* Footer */}
         <footer className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>
-            Built with Tailwind CSS v4, shadcn/ui, Geist fonts, and lucide-react.
-            Tokens defined in <span className="font-heading">lib/tokens.ts</span>.
+            Built with Tailwind CSS v4, shadcn/ui, Geist fonts, and lucide-react. Tokens defined in{" "}
+            <span className="font-heading">lib/tokens.ts</span>.
           </p>
         </footer>
       </main>

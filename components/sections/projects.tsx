@@ -56,13 +56,7 @@ function Reveal({
   );
 }
 
-function ProjectCard({
-  project,
-  index,
-}: {
-  project: (typeof projects)[number];
-  index: number;
-}) {
+function ProjectCard({ project, index }: { project: (typeof projects)[number]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -94,9 +88,7 @@ function ProjectCard({
         <h3 className="font-heading text-lg tracking-tight text-foreground md:text-xl">
           {project.title}
         </h3>
-        <span className="text-xs font-normal font-label text-muted-foreground">
-          {project.year}
-        </span>
+        <span className="text-xs font-normal font-label text-muted-foreground">{project.year}</span>
       </div>
       <p className="mt-1 text-xs font-label uppercase tracking-[0.1em] text-muted-foreground">
         {project.category}

@@ -120,7 +120,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-
 @keyframes shine {
   0% {
     transform: translateX(-100%) skewX(-20deg);
@@ -157,7 +156,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply relative bg-background text-foreground;
   }
   html {
     @apply font-copy;

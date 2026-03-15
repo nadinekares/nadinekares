@@ -2,13 +2,7 @@
 
 import { type ReactNode, useRef } from "react";
 import Image from "next/image";
-import {
-  type MotionValue,
-  motion,
-  useInView,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { type MotionValue, motion, useInView, useScroll, useTransform } from "motion/react";
 
 const stats = [
   { value: "10", label: "Years of Experience" },
@@ -24,13 +18,41 @@ const bioLines = [
 ];
 
 const aboutImages = [
-  { src: "/images/Nadine Kares_about-image-01.jpg", alt: "Studio work — brand identity", ratio: 3 / 4, logo: "/images/Logo_Talentir.svg", logoClass: "h-5 md:h-6", href: "https://www.talentir.com" },
-  { src: "/images/Nadine Kares_about-image-02.jpeg", alt: "Studio work — web design", ratio: 3 / 2.8, logo: "/images/Logo_Hotelpartner.svg", logoClass: "h-10 md:h-12", href: "https://hotelpartner.com/de/b-e-quick/" },
-  { src: "/images/Nadine Kares_about-image-03.jpeg", alt: "Studio work — visual direction", ratio: 3 / 2, logo: "/images/Logo_Janet Brantschen.svg", logoClass: "h-5 md:h-6 max-w-[65%]", href: "https://www.janetbrantschen.com" },
-  { src: "/images/Nadine Kares_about-image-04.jpeg", alt: "Studio work — creative process", ratio: 3 / 1.4, logo: "/images/Logo_Bluecode.svg", logoClass: "h-7 md:h-9", href: "https://www.bluecode.com" },
+  {
+    src: "/images/Nadine Kares_about-image-01.jpg",
+    alt: "Studio work — brand identity",
+    ratio: 3 / 4,
+    logo: "/images/Logo_Talentir.svg",
+    logoClass: "h-5 md:h-6",
+    href: "https://www.talentir.com",
+  },
+  {
+    src: "/images/Nadine Kares_about-image-02.jpeg",
+    alt: "Studio work — web design",
+    ratio: 3 / 2.8,
+    logo: "/images/Logo_Hotelpartner.svg",
+    logoClass: "h-10 md:h-12",
+    href: "https://hotelpartner.com/de/b-e-quick/",
+  },
+  {
+    src: "/images/Nadine Kares_about-image-03.jpeg",
+    alt: "Studio work — visual direction",
+    ratio: 3 / 2,
+    logo: "/images/Logo_Janet Brantschen.svg",
+    logoClass: "h-5 md:h-6 max-w-[65%]",
+    href: "https://www.janetbrantschen.com",
+  },
+  {
+    src: "/images/Nadine Kares_about-image-04.jpeg",
+    alt: "Studio work — creative process",
+    ratio: 3 / 1.4,
+    logo: "/images/Logo_Bluecode.svg",
+    logoClass: "h-7 md:h-9",
+    href: "https://www.bluecode.com",
+  },
 ];
 
-function ScrollReveal({
+function Reveal({
   children,
   delay = 0,
   className,
@@ -43,10 +65,10 @@ function ScrollReveal({
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={{ overflow: "clip" }}>
       <motion.div
-        initial={{ opacity: 0, y: "2rem" }}
-        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: "2rem" }}
+        initial={{ y: "100%" }}
+        animate={inView ? { y: 0 } : { y: "100%" }}
         transition={{
           duration: 1,
           delay,
@@ -56,6 +78,42 @@ function ScrollReveal({
         {children}
       </motion.div>
     </div>
+  );
+}
+
+function LineByLineReveal({
+  lines,
+  className,
+  baseDelay = 0,
+  stagger = 0.08,
+}: {
+  lines: string[];
+  className?: string;
+  baseDelay?: number;
+  stagger?: number;
+}) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+
+  return (
+    <p ref={ref} className={className}>
+      {lines.map((line, i) => (
+        <span key={i} className="block" style={{ overflow: "clip" }}>
+          <motion.span
+            className="block"
+            initial={{ y: "100%" }}
+            animate={inView ? { y: 0 } : { y: "100%" }}
+            transition={{
+              duration: 1,
+              delay: baseDelay + i * stagger,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {line}
+          </motion.span>
+        </span>
+      ))}
+    </p>
   );
 }
 
@@ -72,11 +130,7 @@ function ImageCard({
 }) {
   // Image 1 stays fixed; others animate toward (but never fully reach) image 1's ratio
   const endRatio = index === 0 ? img.ratio : img.ratio + (TARGET_RATIO - img.ratio) * 0.85;
-  const aspectRatio = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [img.ratio, endRatio],
-  );
+  const aspectRatio = useTransform(scrollYProgress, [0, 1], [img.ratio, endRatio]);
 
   return (
     <motion.a
@@ -108,9 +162,11 @@ function ImageCard({
 
       {/* Brand logo overlay — fades in on hover */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100">
-        <img
+        <Image
           src={img.logo}
           alt=""
+          width={160}
+          height={48}
           className={`relative z-10 w-auto max-w-[60%] brightness-0 invert drop-shadow-lg ${img.logoClass}`}
         />
       </div>
@@ -126,30 +182,31 @@ export function About() {
   });
 
   return (
-    <section id="about" className="bg-background px-6 py-24 md:px-10 md:py-32">
+    <section id="about" className="relative bg-background px-6 py-24 md:px-10 md:py-32">
       <div className="md:grid md:grid-cols-12 md:gap-8">
         {/* Left — tag */}
-        <ScrollReveal
+        <Reveal
           className="mb-8 text-xs font-normal uppercase tracking-[0.1em] text-muted-foreground font-label md:col-span-3 md:mb-0"
           delay={0}
         >
           About
-        </ScrollReveal>
+        </Reveal>
 
         {/* Right — bio + stats */}
         <div className="md:col-span-9 md:col-start-4">
-          <ScrollReveal delay={0.4}>
-            <p className="text-xl leading-relaxed text-foreground md:text-2xl">
-              {bioLines.join(" ")}
-            </p>
-          </ScrollReveal>
+          <LineByLineReveal
+            lines={bioLines}
+            className="text-xl leading-relaxed text-foreground md:text-2xl"
+            baseDelay={0.1}
+            stagger={0.12}
+          />
 
           {/* Stats */}
           <div className="mt-8 grid grid-cols-3 gap-6 pt-12 md:mt-12 md:gap-8 md:pt-16">
             {stats.map((stat, i) => (
               <div key={stat.label}>
-                {/* Number — fade reveal */}
-                <ScrollReveal
+                {/* Number — mask reveal */}
+                <Reveal
                   className="font-heading tracking-tight text-foreground"
                   delay={0.2 + i * 0.15}
                 >
@@ -157,7 +214,7 @@ export function About() {
                   <sup className="relative -top-8 ml-0.5 text-xl font-semibold md:-top-9 md:text-2xl">
                     +
                   </sup>
-                </ScrollReveal>
+                </Reveal>
 
                 {/* Label — fade in after number */}
                 <motion.span
@@ -182,15 +239,10 @@ export function About() {
       {/* Image row — full width, 4 columns, scroll-driven height growth */}
       <div
         ref={imageRowRef}
-        className="mt-16 grid grid-cols-2 items-end gap-2 md:mt-24 md:grid-cols-4 md:gap-4"
+        className="relative mt-16 grid grid-cols-2 items-end gap-2 md:mt-24 md:grid-cols-4 md:gap-4"
       >
         {aboutImages.map((img, i) => (
-          <ImageCard
-            key={img.src}
-            img={img}
-            index={i}
-            scrollYProgress={scrollYProgress}
-          />
+          <ImageCard key={img.src} img={img} index={i} scrollYProgress={scrollYProgress} />
         ))}
       </div>
     </section>

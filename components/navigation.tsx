@@ -29,9 +29,7 @@ function useNavTheme() {
       const navBottom = 80; // approximate nav height in px
 
       // On pages without light sections (e.g. legal pages), check if body background is light
-      const hasLightSections = LIGHT_SECTIONS.some((id) =>
-        document.getElementById(id)
-      );
+      const hasLightSections = LIGHT_SECTIONS.some((id) => document.getElementById(id));
 
       if (!hasLightSections) {
         // Legal/subpages have a white background — always use dark nav
@@ -127,11 +125,7 @@ export function Navigation() {
       className="fixed inset-x-0 top-0 z-50"
       style={{
         opacity: showNav ? 1 : 0,
-        transform: !showNav
-          ? "translateY(-20px)"
-          : hideNav
-            ? "translateY(-100%)"
-            : "translateY(0)",
+        transform: !showNav ? "translateY(-20px)" : hideNav ? "translateY(-100%)" : "translateY(0)",
         transitionProperty: "opacity, transform",
         transitionDuration: hideNav ? "0.4s" : "0.7s",
         transitionTimingFunction: "ease-out",
@@ -194,7 +188,13 @@ export function Navigation() {
               ? "border-white/80 bg-transparent text-white hover:border-brand hover:bg-brand hover:text-white"
               : "hover:border-brand hover:bg-brand hover:text-white"
           }`}
-          render={<Link href="https://cal.com/nadine-kares-design" target="_blank" rel="noopener noreferrer" />}
+          render={
+            <Link
+              href="https://cal.com/nadine-kares-design"
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          }
         >
           Let&apos;s Chat
         </Button>
@@ -234,36 +234,37 @@ export function Navigation() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-primary md:hidden"
           >
-            {[...navLinks, { label: "Contact", href: "https://cal.com/nadine-kares-design", external: true }].map(
-              (link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
-                >
-                  {"external" in link && link.external ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsOpen(false)}
-                      className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
-                    >
-                      {link.label}
-                    </Link>
-                  )}
-                </motion.div>
-              ),
-            )}
+            {[
+              ...navLinks,
+              { label: "Contact", href: "https://cal.com/nadine-kares-design", external: true },
+            ].map((link, i) => (
+              <motion.div
+                key={link.href}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
+              >
+                {"external" in link && link.external ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                )}
+              </motion.div>
+            ))}
             <div className="mt-8 flex gap-6 border-t border-primary-foreground/20 pt-8">
               {socialLinks.map((link) => (
                 <a

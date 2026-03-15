@@ -53,21 +53,71 @@ export interface RadiusToken {
 // ─── COLORS ──────────────────────────────────────────────────
 
 export const themeColors: ColorToken[] = [
-  { name: "background", cssVar: "var(--background)", twClass: "bg-background", value: "oklch(1 0 0)" },
-  { name: "foreground", cssVar: "var(--foreground)", twClass: "text-foreground", value: "oklch(0.145 0 0)" },
+  {
+    name: "background",
+    cssVar: "var(--background)",
+    twClass: "bg-background",
+    value: "oklch(1 0 0)",
+  },
+  {
+    name: "foreground",
+    cssVar: "var(--foreground)",
+    twClass: "text-foreground",
+    value: "oklch(0.145 0 0)",
+  },
   { name: "primary", cssVar: "var(--primary)", twClass: "bg-primary", value: "oklch(0.205 0 0)" },
-  { name: "primary-foreground", cssVar: "var(--primary-foreground)", twClass: "bg-primary-foreground", value: "oklch(0.985 0 0)" },
-  { name: "secondary", cssVar: "var(--secondary)", twClass: "bg-secondary", value: "oklch(0.97 0 0)" },
-  { name: "secondary-foreground", cssVar: "var(--secondary-foreground)", twClass: "bg-secondary-foreground", value: "oklch(0.205 0 0)" },
+  {
+    name: "primary-foreground",
+    cssVar: "var(--primary-foreground)",
+    twClass: "bg-primary-foreground",
+    value: "oklch(0.985 0 0)",
+  },
+  {
+    name: "secondary",
+    cssVar: "var(--secondary)",
+    twClass: "bg-secondary",
+    value: "oklch(0.97 0 0)",
+  },
+  {
+    name: "secondary-foreground",
+    cssVar: "var(--secondary-foreground)",
+    twClass: "bg-secondary-foreground",
+    value: "oklch(0.205 0 0)",
+  },
   { name: "muted", cssVar: "var(--muted)", twClass: "bg-muted", value: "oklch(0.97 0 0)" },
-  { name: "muted-foreground", cssVar: "var(--muted-foreground)", twClass: "bg-muted-foreground", value: "oklch(0.556 0 0)" },
+  {
+    name: "muted-foreground",
+    cssVar: "var(--muted-foreground)",
+    twClass: "bg-muted-foreground",
+    value: "oklch(0.556 0 0)",
+  },
   { name: "accent", cssVar: "var(--accent)", twClass: "bg-accent", value: "oklch(0.97 0 0)" },
-  { name: "accent-foreground", cssVar: "var(--accent-foreground)", twClass: "bg-accent-foreground", value: "oklch(0.205 0 0)" },
-  { name: "destructive", cssVar: "var(--destructive)", twClass: "bg-destructive", value: "oklch(0.577 0.245 27.325)" },
+  {
+    name: "accent-foreground",
+    cssVar: "var(--accent-foreground)",
+    twClass: "bg-accent-foreground",
+    value: "oklch(0.205 0 0)",
+  },
+  {
+    name: "destructive",
+    cssVar: "var(--destructive)",
+    twClass: "bg-destructive",
+    value: "oklch(0.577 0.245 27.325)",
+  },
   { name: "card", cssVar: "var(--card)", twClass: "bg-card", value: "oklch(1 0 0)" },
-  { name: "card-foreground", cssVar: "var(--card-foreground)", twClass: "bg-card-foreground", value: "oklch(0.145 0 0)" },
+  {
+    name: "card-foreground",
+    cssVar: "var(--card-foreground)",
+    twClass: "bg-card-foreground",
+    value: "oklch(0.145 0 0)",
+  },
   { name: "popover", cssVar: "var(--popover)", twClass: "bg-popover", value: "oklch(1 0 0)" },
-  { name: "popover-foreground", cssVar: "var(--popover-foreground)", twClass: "bg-popover-foreground", value: "oklch(0.145 0 0)" },
+  {
+    name: "popover-foreground",
+    cssVar: "var(--popover-foreground)",
+    twClass: "bg-popover-foreground",
+    value: "oklch(0.145 0 0)",
+  },
   { name: "border", cssVar: "var(--border)", twClass: "bg-border", value: "oklch(0.922 0 0)" },
   { name: "input", cssVar: "var(--input)", twClass: "bg-input", value: "oklch(0.922 0 0)" },
   { name: "ring", cssVar: "var(--ring)", twClass: "bg-ring", value: "oklch(0.708 0 0)" },
@@ -75,22 +125,82 @@ export const themeColors: ColorToken[] = [
 ];
 
 export const chartColors: ColorToken[] = [
-  { name: "chart-1", cssVar: "var(--chart-1)", twClass: "bg-chart-1", value: "oklch(0.809 0.105 251.813)" },
-  { name: "chart-2", cssVar: "var(--chart-2)", twClass: "bg-chart-2", value: "oklch(0.623 0.214 259.815)" },
-  { name: "chart-3", cssVar: "var(--chart-3)", twClass: "bg-chart-3", value: "oklch(0.546 0.245 262.881)" },
-  { name: "chart-4", cssVar: "var(--chart-4)", twClass: "bg-chart-4", value: "oklch(0.488 0.243 264.376)" },
-  { name: "chart-5", cssVar: "var(--chart-5)", twClass: "bg-chart-5", value: "oklch(0.424 0.199 265.638)" },
+  {
+    name: "chart-1",
+    cssVar: "var(--chart-1)",
+    twClass: "bg-chart-1",
+    value: "oklch(0.809 0.105 251.813)",
+  },
+  {
+    name: "chart-2",
+    cssVar: "var(--chart-2)",
+    twClass: "bg-chart-2",
+    value: "oklch(0.623 0.214 259.815)",
+  },
+  {
+    name: "chart-3",
+    cssVar: "var(--chart-3)",
+    twClass: "bg-chart-3",
+    value: "oklch(0.546 0.245 262.881)",
+  },
+  {
+    name: "chart-4",
+    cssVar: "var(--chart-4)",
+    twClass: "bg-chart-4",
+    value: "oklch(0.488 0.243 264.376)",
+  },
+  {
+    name: "chart-5",
+    cssVar: "var(--chart-5)",
+    twClass: "bg-chart-5",
+    value: "oklch(0.424 0.199 265.638)",
+  },
 ];
 
 export const sidebarColors: ColorToken[] = [
   { name: "sidebar", cssVar: "var(--sidebar)", twClass: "bg-sidebar", value: "oklch(0.985 0 0)" },
-  { name: "sidebar-foreground", cssVar: "var(--sidebar-foreground)", twClass: "bg-sidebar-foreground", value: "oklch(0.145 0 0)" },
-  { name: "sidebar-primary", cssVar: "var(--sidebar-primary)", twClass: "bg-sidebar-primary", value: "oklch(0.205 0 0)" },
-  { name: "sidebar-primary-foreground", cssVar: "var(--sidebar-primary-foreground)", twClass: "bg-sidebar-primary-foreground", value: "oklch(0.985 0 0)" },
-  { name: "sidebar-accent", cssVar: "var(--sidebar-accent)", twClass: "bg-sidebar-accent", value: "oklch(0.97 0 0)" },
-  { name: "sidebar-accent-foreground", cssVar: "var(--sidebar-accent-foreground)", twClass: "bg-sidebar-accent-foreground", value: "oklch(0.205 0 0)" },
-  { name: "sidebar-border", cssVar: "var(--sidebar-border)", twClass: "bg-sidebar-border", value: "oklch(0.922 0 0)" },
-  { name: "sidebar-ring", cssVar: "var(--sidebar-ring)", twClass: "bg-sidebar-ring", value: "oklch(0.708 0 0)" },
+  {
+    name: "sidebar-foreground",
+    cssVar: "var(--sidebar-foreground)",
+    twClass: "bg-sidebar-foreground",
+    value: "oklch(0.145 0 0)",
+  },
+  {
+    name: "sidebar-primary",
+    cssVar: "var(--sidebar-primary)",
+    twClass: "bg-sidebar-primary",
+    value: "oklch(0.205 0 0)",
+  },
+  {
+    name: "sidebar-primary-foreground",
+    cssVar: "var(--sidebar-primary-foreground)",
+    twClass: "bg-sidebar-primary-foreground",
+    value: "oklch(0.985 0 0)",
+  },
+  {
+    name: "sidebar-accent",
+    cssVar: "var(--sidebar-accent)",
+    twClass: "bg-sidebar-accent",
+    value: "oklch(0.97 0 0)",
+  },
+  {
+    name: "sidebar-accent-foreground",
+    cssVar: "var(--sidebar-accent-foreground)",
+    twClass: "bg-sidebar-accent-foreground",
+    value: "oklch(0.205 0 0)",
+  },
+  {
+    name: "sidebar-border",
+    cssVar: "var(--sidebar-border)",
+    twClass: "bg-sidebar-border",
+    value: "oklch(0.922 0 0)",
+  },
+  {
+    name: "sidebar-ring",
+    cssVar: "var(--sidebar-ring)",
+    twClass: "bg-sidebar-ring",
+    value: "oklch(0.708 0 0)",
+  },
 ];
 
 // ─── TYPOGRAPHY ──────────────────────────────────────────────
@@ -142,16 +252,36 @@ export const fontWeights = [
 ];
 
 export const headingHierarchy = [
-  { tag: "h1", cls: "text-5xl font-bold tracking-tight", description: "text-5xl font-bold tracking-tight" },
-  { tag: "h2", cls: "text-4xl font-semibold tracking-tight", description: "text-4xl font-semibold tracking-tight" },
-  { tag: "h3", cls: "text-3xl font-semibold tracking-tight", description: "text-3xl font-semibold tracking-tight" },
-  { tag: "h4", cls: "text-2xl font-semibold tracking-tight", description: "text-2xl font-semibold tracking-tight" },
+  {
+    tag: "h1",
+    cls: "text-5xl font-bold tracking-tight",
+    description: "text-5xl font-bold tracking-tight",
+  },
+  {
+    tag: "h2",
+    cls: "text-4xl font-semibold tracking-tight",
+    description: "text-4xl font-semibold tracking-tight",
+  },
+  {
+    tag: "h3",
+    cls: "text-3xl font-semibold tracking-tight",
+    description: "text-3xl font-semibold tracking-tight",
+  },
+  {
+    tag: "h4",
+    cls: "text-2xl font-semibold tracking-tight",
+    description: "text-2xl font-semibold tracking-tight",
+  },
   { tag: "h5", cls: "text-xl font-medium", description: "text-xl font-medium" },
   { tag: "h6", cls: "text-lg font-medium", description: "text-lg font-medium" },
 ];
 
 export const typographyStyles = [
-  { name: "Tag", cls: "text-xs font-normal tracking-[0.1em] uppercase font-label", description: "text-xs font-normal tracking-[0.1em] uppercase" },
+  {
+    name: "Tag",
+    cls: "text-xs font-normal tracking-[0.1em] uppercase font-label",
+    description: "text-xs font-normal tracking-[0.1em] uppercase",
+  },
 ];
 
 export const trackingValues = [

@@ -46,13 +46,11 @@ export default function ComponentsPage() {
             Dev Only
           </div>
           {isEmpty && (
-            <h1 className="text-4xl font-bold tracking-tight text-foreground">
-              Components
-            </h1>
+            <h1 className="text-4xl font-bold tracking-tight text-foreground">Components</h1>
           )}
           <p className="mt-2 text-lg text-muted-foreground">
-            Reusable component library. Edit a component here or on the main
-            site — changes sync everywhere.
+            Reusable component library. Edit a component here or on the main site — changes sync
+            everywhere.
           </p>
         </div>
 
@@ -61,10 +59,8 @@ export default function ComponentsPage() {
           <div className="rounded-xl border border-dashed border-border bg-muted/30 p-12 text-center">
             <p className="text-muted-foreground">
               No components registered yet. Design a component, save it under{" "}
-              <span className="font-heading">components/ui/</span>, and add it
-              to{" "}
-              <span className="font-heading">lib/component-registry.tsx</span>{" "}
-              to see it here.
+              <span className="font-heading">components/ui/</span>, and add it to{" "}
+              <span className="font-heading">lib/component-registry.tsx</span> to see it here.
             </p>
           </div>
         )}
@@ -90,12 +86,8 @@ export default function ComponentsPage() {
                     {components.map((comp) => (
                       <div key={comp.name} className="space-y-4">
                         <div>
-                          <h3 className="text-lg font-medium text-foreground">
-                            {comp.name}
-                          </h3>
-                          <p className="text-sm text-muted-foreground">
-                            {comp.description}
-                          </p>
+                          <h3 className="text-lg font-medium text-foreground">{comp.name}</h3>
+                          <p className="text-sm text-muted-foreground">{comp.description}</p>
                           <p className="mt-1 font-heading text-xs text-muted-foreground">
                             {comp.importPath}
                           </p>
@@ -117,8 +109,7 @@ export default function ComponentsPage() {
         {/* Footer */}
         <footer className="mt-16 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>
-            Registry defined in{" "}
-            <span className="font-heading">lib/component-registry.tsx</span>.
+            Registry defined in <span className="font-heading">lib/component-registry.tsx</span>.
             {componentRegistry.length} component
             {componentRegistry.length !== 1 ? "s" : ""} registered.
           </p>

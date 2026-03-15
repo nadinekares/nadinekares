@@ -56,7 +56,8 @@ export function Footer() {
           {/* Left: Quote */}
           <div>
             <p className="text-lg leading-snug text-white/70 md:text-xl">
-              Catching clicks,<br />
+              Catching clicks,
+              <br />
               crafting pixels.
             </p>
           </div>
@@ -65,9 +66,7 @@ export function Footer() {
           <div className="flex gap-16 sm:gap-20 md:gap-28 lg:gap-36">
             {/* Pages */}
             <div>
-              <p className="text-sm font-label uppercase tracking-[0.1em] text-white/50">
-                Pages
-              </p>
+              <p className="text-sm font-label uppercase tracking-[0.1em] text-white/50">Pages</p>
               <ul className="mt-3 flex flex-col gap-2">
                 {navLinks.map((link) => (
                   <li key={link.href}>

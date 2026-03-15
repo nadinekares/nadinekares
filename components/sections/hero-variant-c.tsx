@@ -63,9 +63,7 @@ export function HeroVariantC() {
         transition={{ duration: 0.6, delay: 1.1 }}
         className="relative z-10 flex items-end justify-between"
       >
-        <span className="text-xs text-muted-foreground">
-          Based in Germany
-        </span>
+        <span className="text-xs text-muted-foreground">Based in Germany</span>
         <a
           href="#work"
           className="group flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground transition-colors duration-300 hover:text-background"
@@ -78,11 +76,7 @@ export function HeroVariantC() {
             stroke="currentColor"
             strokeWidth={1.5}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 5v14m0 0l-4-4m4 4l4-4"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m0 0l-4-4m4 4l4-4" />
           </svg>
         </a>
       </motion.div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useCallback, useState } from "react";
+import { useRef, useEffect, useCallback, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { useIntroPhase } from "@/components/intro-provider";
 
@@ -8,18 +8,24 @@ const LENS_SIZE_VW = 18;
 const HERO_BLUR_DATA_URL =
   "data:image/jpeg;base64,/9j/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAKABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIDBP/EAB4QAAICAgIDAAAAAAAAAAAAAAERAgMABCExUWGx/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AM9VUbHEB8hrxiWwjXWYyYlygsOqSBJE9jJbxdgfv7gf/9k=";
 
+const LENS_QUERY = "(pointer: fine) and (min-width: 1024px)";
+
+function subscribeLensQuery(callback: () => void) {
+  const mq = window.matchMedia(LENS_QUERY);
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
+function getLensSnapshot() {
+  return window.matchMedia(LENS_QUERY).matches;
+}
+
+function getLensServerSnapshot() {
+  return false;
+}
+
 function useLensEnabled() {
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(pointer: fine) and (min-width: 1024px)");
-    setEnabled(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setEnabled(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
-  return enabled;
+  return useSyncExternalStore(subscribeLensQuery, getLensSnapshot, getLensServerSnapshot);
 }
 
 /* ── Crosshair SVG (reused in viewfinder + lens) ── */
@@ -123,10 +129,7 @@ export function Hero() {
       lens!.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`;
       lensImg!.style.transform = `translate3d(${-current.x}px, ${-current.y}px, 0)`;
 
-      if (
-        Math.abs(target.x - current.x) > 0.1 ||
-        Math.abs(target.y - current.y) > 0.1
-      ) {
+      if (Math.abs(target.x - current.x) > 0.1 || Math.abs(target.y - current.y) > 0.1) {
         rafId = requestAnimationFrame(tick);
       } else {
         isAnimating = false;
@@ -213,8 +216,7 @@ export function Hero() {
 
   // Viewfinder border position
   const getBorderInset = () => {
-    if (phase === "image")
-      return { top: "0%", left: "0%", right: "0%", bottom: "0%" };
+    if (phase === "image") return { top: "0%", left: "0%", right: "0%", bottom: "0%" };
     return {
       top: `calc(50% - ${LENS_SIZE_VW / 2}vw)`,
       left: `calc(50% - ${LENS_SIZE_VW / 2}vw)`,
@@ -225,9 +227,7 @@ export function Hero() {
 
   const borderInset = getBorderInset();
   const showViewfinder =
-    phase === "viewfinder" ||
-    phase === "reveal" ||
-    (phase === "done" && !mouseActive);
+    phase === "viewfinder" || phase === "reveal" || (phase === "done" && !mouseActive);
 
   return (
     <section
@@ -264,8 +264,7 @@ export function Hero() {
             opacity: mouseActive ? 0 : 1,
             transitionProperty: "clip-path, opacity",
             transitionDuration: mouseActive ? "0s, 0s" : "0.7s, 0.3s",
-            transitionTimingFunction:
-              "cubic-bezier(0.25, 0.1, 0.25, 1), ease-out",
+            transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1), ease-out",
           }}
         >
           <Image
@@ -358,23 +357,21 @@ export function Hero() {
         className="absolute inset-x-0 z-10 flex w-full justify-between px-6 font-normal tracking-[0.1em] uppercase font-label text-primary-foreground md:px-10"
         style={{ top: "50%", fontSize: "clamp(0.625rem, 1.1vw, 1rem)" }}
       >
-        {["Brands", "Websites", "Design", "Vienna / Zurich"].map(
-          (label, i) => (
-            <span
-              key={label}
-              style={{
-                opacity: showUI ? 1 : 0,
-                transform: showUI ? "translateY(0)" : "translateY(12px)",
-                transitionProperty: "opacity, transform",
-                transitionDuration: "0.6s",
-                transitionTimingFunction: "ease-out",
-                transitionDelay: showUI ? `${i * 100}ms` : "0ms",
-              }}
-            >
-              {label}
-            </span>
-          ),
-        )}
+        {["Brands", "Websites", "Design", "Vienna / Zurich"].map((label, i) => (
+          <span
+            key={label}
+            style={{
+              opacity: showUI ? 1 : 0,
+              transform: showUI ? "translateY(0)" : "translateY(12px)",
+              transitionProperty: "opacity, transform",
+              transitionDuration: "0.6s",
+              transitionTimingFunction: "ease-out",
+              transitionDelay: showUI ? `${i * 100}ms` : "0ms",
+            }}
+          >
+            {label}
+          </span>
+        ))}
       </div>
 
       {/* ── Name overlay ── */}

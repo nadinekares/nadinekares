@@ -44,11 +44,7 @@ function Reveal({
   }, [inView, delay]);
 
   return (
-    <div
-      ref={ref}
-      className={className}
-      style={{ overflow: animationDone ? "visible" : "hidden" }}
-    >
+    <div ref={ref} className={className} style={{ overflow: animationDone ? "visible" : "hidden" }}>
       <motion.div
         initial={{ y: "100%" }}
         animate={inView ? { y: 0 } : { y: "100%" }}
@@ -101,7 +97,10 @@ export function Services() {
             <div
               className="group relative cursor-pointer py-6 md:py-8"
               onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => { setHoveredIndex(null); setTilt(0); }}
+              onMouseLeave={() => {
+                setHoveredIndex(null);
+                setTilt(0);
+              }}
               onMouseMove={handleMouseMove}
             >
               {/* Hover image — centered on this row, desktop only */}

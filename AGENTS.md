@@ -3,6 +3,7 @@
 This file defines the default implementation standards for all landing page projects in this workspace.
 
 ## Required Tech Stack
+
 - Next.js
 - TypeScript
 - Tailwind CSS v4
@@ -10,20 +11,23 @@ This file defines the default implementation standards for all landing page proj
 - Motion (for animations)
 
 ## Package Manager Standard
+
 - Use **Bun** as the default package manager.
 - Prefer `bun add`, `bun remove`, `bun run`, and `bunx`.
 - Do not use npm, pnpm, or yarn unless explicitly required by a project constraint.
 - If `bun` is not available in `PATH`, use `~/.bun/bin/bun` and `~/.bun/bin/bunx`.
 
 ## Project Setup Standard
+
 - Initialize projects in the current root directory (same level as `AGENTS.md`).
 - Do not create a nested app folder during bootstrap.
 - Ensure `package.json` is at the root, alongside `AGENTS.md`.
 
 ## Fast Bootstrap (Non-Interactive)
+
 Use this sequence for consistent setup speed:
 
-1) Scaffold Next.js (TypeScript + Tailwind v4 + App Router + Bun)
+1. Scaffold Next.js (TypeScript + Tailwind v4 + App Router + Bun)
 
 ```bash
 bunx --bun create-next-app@latest . \
@@ -31,25 +35,25 @@ bunx --bun create-next-app@latest . \
   --import-alias "@/*" --yes --skip-git
 ```
 
-2) Initialize shadcn/ui (local project config + theme tokens)
+2. Initialize shadcn/ui (local project config + theme tokens)
 
 ```bash
 bunx --bun shadcn@latest init --defaults --base-color neutral --yes
 ```
 
-3) Add at least one shadcn/ui primitive used in the page
+3. Add at least one shadcn/ui primitive used in the page
 
 ```bash
 bunx --bun shadcn@latest add button --yes
 ```
 
-4) Add Motion
+4. Add Motion
 
 ```bash
 bun add motion
 ```
 
-5) Generate a Styleguide Page
+5. Generate a Styleguide Page
 
 After setup, always create `app/styleguide/page.tsx` — a living reference of all design primitives defined in the project. This page must include:
 
@@ -71,11 +75,13 @@ The page must have a sticky navigation bar linking to each section. Every elemen
 **Design Token System**: All design tokens (colors, fonts, spacing, radii, grid, shadows, etc.) are defined in `lib/tokens.ts` as the single source of truth. The styleguide auto-generates its UI by importing from this file. Components must use semantic Tailwind classes (e.g. `bg-primary`, `text-foreground`, `bg-background`) instead of hardcoded colors (e.g. `bg-white`, `text-neutral-900`).
 
 **Token Sync Rule (CRITICAL)**: Whenever a design token is added, removed, or changed — regardless of which file the change originates in — ALL THREE files must be kept in sync:
+
 1. `lib/tokens.ts` — the token definition (name, CSS var, Tailwind class, value)
 2. `app/globals.css` — the CSS custom property in `:root` AND the `@theme inline` mapping (if applicable)
 3. `app/styleguide/page.tsx` — MUST import new token arrays and add corresponding render sections
 
 **Styleguide Auto-Import Pattern**: The styleguide uses imports + `.map()` rendering to display tokens. When adding a new token array to `lib/tokens.ts`:
+
 1. **Export the array** from `lib/tokens.ts` (e.g. `export const typographyStyles = [...]`)
 2. **Import it** at the top of `app/styleguide/page.tsx` in the existing import statement
 3. **Add a render section** with the same pattern as other sections (e.g. colors, typography, buttons):
@@ -88,9 +94,7 @@ The page must have a sticky navigation bar linking to each section. Every elemen
            <p className="mb-1 font-heading text-xs text-muted-foreground">
              {item.displayName} — {item.description}
            </p>
-           <p className={`${item.cls} text-foreground`}>
-             Display Text
-           </p>
+           <p className={`${item.cls} text-foreground`}>Display Text</p>
          </div>
        ))}
      </div>
@@ -98,6 +102,7 @@ The page must have a sticky navigation bar linking to each section. Every elemen
    ```
 
 **Examples:**
+
 - **Adding a new color** (e.g. `--success`): Add to `themeColors` array in `lib/tokens.ts`, add `--success: oklch(...)` to `:root` in `globals.css`, add `--color-success: var(--success)` to `@theme inline` in `globals.css`. The styleguide picks it up automatically.
 - **Changing a color value** (e.g. `--primary`): Update the `value` field in `lib/tokens.ts` AND the `:root` property in `globals.css`. The styleguide and all components update automatically.
 - **Adding a new font family**: Add to `fonts` array in `lib/tokens.ts`, add the `--font-*` variable to `@theme inline` in `globals.css`. The styleguide picks it up automatically.
@@ -117,6 +122,7 @@ Every project must include a component library page at `app/components/page.tsx`
 - Should never be linked from the main site navigation or any public-facing page.
 
 **Component Registration Workflow**: When a new reusable component is designed:
+
 1. Create the component file under `components/ui/` (for primitives) or `components/sections/` (for page sections).
 2. Import it in `lib/component-registry.tsx` and add an entry to the `componentRegistry` array with: `name`, `description`, `category`, `importPath`, and a `preview` (live JSX with example props).
 3. The component automatically appears on the `/components` page, grouped by category.
@@ -143,6 +149,7 @@ Every project must include an archive page at `app/archive/page.tsx` for storing
 - Should never be linked from the main site navigation or any public-facing page.
 
 ## Setup Fallbacks (Important)
+
 - If current folder name contains spaces/capital letters and `create-next-app` rejects `.`:
   - Scaffold into a temporary lowercase folder in the workspace, then move files to root.
   - Example:
@@ -163,12 +170,14 @@ rm -rf landing-temp
   - Prefer local/system font variables first, then add hosted fonts later if needed.
 
 ## Asset Organization
+
 - Store all image assets in Next.js `public/` directory.
 - Use clear subfolders when needed (e.g. `public/images/hero`, `public/images/logos`).
 - Reference images from root-relative paths (e.g. `/images/hero/main-visual.webp`).
 - Always optimize images before uploading/adding them to the project (resize/compress, prefer modern formats like WebP when appropriate).
 
 ## UI Defaults
+
 - Default theme must be **light mode**.
 - Do not ship dark mode unless explicitly requested for the project.
 - Two font families: **font-copy** (Geist Sans — body/copy text) and **font-heading** (Geist Mono — headings/code labels).
@@ -181,10 +190,12 @@ rm -rf landing-temp
 When changing or adding custom fonts (especially for `font-heading`):
 
 **When user requests a font change:**
+
 1. Ask the user: "Where are the font files located?" — Get the file path.
 2. Identify available font weights (Regular, Medium, SemiBold, Bold, etc.).
 
 **Implementation workflow:**
+
 1. **Convert to WOFF2** — Convert all necessary font weight files (.otf, .ttf, .woff) to WOFF2 format using fontTools for optimal web delivery.
 2. **Store in public/** — Place converted `.woff2` files in `public/fonts/[fontname]/` directory (e.g. `public/fonts/safiro/`).
 3. **Add @font-face rules** — Update `app/globals.css`:
@@ -199,6 +210,7 @@ When changing or adding custom fonts (especially for `font-heading`):
 7. **Verify** — Check that font files load (200 OK status) with no console errors, and text renders correctly.
 
 **Example (Safiro):**
+
 - Fonts stored in: `public/fonts/safiro/Safiro-*.woff2`
 - @font-face: 4 declarations (400, 500, 600, 700)
 - CSS variable: `--font-heading: "Safiro", ui-sans-serif, system-ui, sans-serif`
@@ -208,6 +220,7 @@ When changing or adding custom fonts (especially for `font-heading`):
 **Token Sync (CRITICAL):** Keep `lib/tokens.ts` and `app/globals.css` in sync whenever fonts change. Always verify files load in development before publishing.
 
 ## Branch Naming Convention
+
 - Use: `feature/xxx`
 - Replace `xxx` with a short, descriptive kebab-case name.
 - Examples:
@@ -216,12 +229,14 @@ When changing or adding custom fonts (especially for `font-heading`):
   - `feature/lead-form-optimization`
 
 ## Dev Server Rules
+
 - **Never force-kill the Next.js dev server** (`pkill`, `kill -9`, etc.). Always stop it gracefully.
 - If the dev server must be restarted, **always delete `.next/` first** (`rm -rf .next`) before starting a new one. Turbopack's persistent cache corrupts easily when the process is interrupted, causing `localhost` to stop working.
 - Use `bun run dev` to start the dev server. Do not switch to npm/yarn.
 - If the dev server is already running, reuse it — do not start a second instance.
 
 ## Implementation Notes
+
 - Prefer reusable, composable sections and components.
 - Keep copy structure and layout optimized for conversion-focused landing pages.
 - Keep TypeScript strict and avoid `any` unless unavoidable.
@@ -231,12 +246,14 @@ When changing or adding custom fonts (especially for `font-heading`):
 ## Landing Page Best Practices
 
 ### Visual Direction
+
 - Define a clear visual system before building: typography scale, spacing scale, color palette, and component style.
 - Use intentional typography pairings; avoid generic default font stacks unless brand requires it.
 - Use strong visual hierarchy: clear section headings, short supporting copy, and consistent CTA emphasis.
 - Keep layouts clean and breathable with consistent spacing rhythm.
 
 ### Conversion-Focused Structure
+
 - Use this high-converting section order by default:
   1. Hero (value proposition + primary CTA)
   2. Social proof (logos, testimonials, metrics)
@@ -248,18 +265,21 @@ When changing or adding custom fonts (especially for `font-heading`):
 - Use specific, benefit-driven copy instead of vague marketing language.
 
 ### UX and Interaction
+
 - Design mobile-first; then refine tablet and desktop layouts.
 - Keep interactions subtle and meaningful (scroll reveals, hover states, CTA feedback).
 - Avoid animation noise; motion should support clarity, not distract.
 - Ensure clear states for interactive elements (default, hover, active, focus, disabled).
 
 ### Accessibility
+
 - Meet WCAG contrast standards for text and key UI controls.
 - Provide visible focus styles for keyboard users.
 - Use semantic HTML landmarks and heading order.
 - Add alt text for meaningful images and labels for form controls.
 
 ### Performance and SEO
+
 - **Always optimize for loading speed.** Every code change must consider performance impact. Prefer fast, lightweight solutions over heavy ones.
 - Optimize Core Web Vitals (especially LCP and CLS).
 - Use `next/image` for responsive image delivery with explicit `quality`, `sizes`, and `placeholder="blur"` (with `blurDataURL`) for above-the-fold images.
@@ -270,12 +290,14 @@ When changing or adding custom fonts (especially for `font-heading`):
 - Add metadata, Open Graph tags, and structured page titles/descriptions.
 
 ### Component and Code Quality
+
 - Build sections as reusable components under a clear structure (e.g. `components/sections/*`).
 - Keep Tailwind utility usage consistent; extract repeated patterns into shared components.
 - Use shadcn/ui primitives first, then customize for brand expression.
 - Keep strict TypeScript types for props, APIs, and form data.
 
 ### Content Standards
+
 - Headlines should be clear, specific, and outcome-driven.
 - Paragraphs should be short and scannable.
 - Use real, credible proof points wherever possible (customer quotes, metrics, outcomes).

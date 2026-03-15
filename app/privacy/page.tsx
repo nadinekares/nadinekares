@@ -8,10 +8,7 @@ export const metadata = {
 };
 
 export default function PrivacyPage() {
-  const content = fs.readFileSync(
-    path.join(process.cwd(), "content", "privacy.md"),
-    "utf-8"
-  );
+  const content = fs.readFileSync(path.join(process.cwd(), "content", "privacy.md"), "utf-8");
 
   return <LegalPage content={content} backLabel="Back" />;
 }
