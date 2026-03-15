@@ -132,10 +132,19 @@ export function Hero() {
       target.x = x - w / 2;
       target.y = y - h / 2;
 
-      // First mouse movement: activate lens + hide static viewfinder
-      // Both state updates are batched → single re-render → no flash
+      // First mouse movement: instant swap from static viewfinder to lens
       if (!mouseActiveRef.current) {
         mouseActiveRef.current = true;
+
+        // Show lens instantly (no CSS transition) at center position
+        lens!.style.transitionDuration = "0s";
+        lens!.style.opacity = "1";
+
+        // Restore normal transition for future mouse enter/leave
+        requestAnimationFrame(() => {
+          if (lens) lens.style.transitionDuration = "0.3s";
+        });
+
         setMouseActive(true);
         setLensVisible(true);
       }
@@ -243,7 +252,7 @@ export function Hero() {
             clipPath: getClipPath(),
             opacity: mouseActive ? 0 : 1,
             transitionProperty: "clip-path, opacity",
-            transitionDuration: "1.4s, 0.5s",
+            transitionDuration: mouseActive ? "0s, 0s" : "1.4s, 0.5s",
             transitionTimingFunction:
               "cubic-bezier(0.25, 0.1, 0.25, 1), ease-out",
           }}
@@ -268,7 +277,7 @@ export function Hero() {
           style={{
             opacity: showViewfinder ? 1 : 0,
             transitionProperty: "opacity",
-            transitionDuration: "0.3s",
+            transitionDuration: mouseActive ? "0s" : "0.3s",
             transitionTimingFunction: "ease",
           }}
         >
