@@ -145,7 +145,7 @@ export function About() {
   const imageRowRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: imageRowRef,
-    offset: ["start end", "start 0.2"],
+    offset: ["start 0.75", "start 0.2"],
   });
 
   return (

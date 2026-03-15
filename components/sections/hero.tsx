@@ -242,7 +242,7 @@ export function Hero() {
           alt={lensEnabled ? "" : "Nadine Kares portrait"}
           fill
           priority
-          className={`object-cover scale-[1.03] transition-[filter] duration-[1400ms] ease-out ${
+          className={`object-cover scale-[1.03] transition-[filter] duration-[700ms] ease-out ${
             showBlur ? "blur-[10px]" : ""
           }`}
           sizes="100vw"
@@ -263,7 +263,7 @@ export function Hero() {
             clipPath: getClipPath(),
             opacity: mouseActive ? 0 : 1,
             transitionProperty: "clip-path, opacity",
-            transitionDuration: mouseActive ? "0s, 0s" : "1.4s, 0.5s",
+            transitionDuration: mouseActive ? "0s, 0s" : "0.7s, 0.3s",
             transitionTimingFunction:
               "cubic-bezier(0.25, 0.1, 0.25, 1), ease-out",
           }}
@@ -298,7 +298,7 @@ export function Hero() {
             style={{
               ...borderInset,
               transitionProperty: "all",
-              transitionDuration: "1.4s",
+              transitionDuration: "0.7s",
               transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
             }}
           />

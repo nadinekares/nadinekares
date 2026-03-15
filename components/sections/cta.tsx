@@ -88,7 +88,7 @@ export function Cta() {
             href="mailto:hello@nadinekares.com"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "border-white/90 bg-white/10 text-white backdrop-blur-[4px] hover:bg-white hover:text-black"
+              "border-white/90 bg-white/10 text-white backdrop-blur-[4px] hover:border-white/90 hover:bg-white hover:text-black"
             )}
           >
             Get in Touch

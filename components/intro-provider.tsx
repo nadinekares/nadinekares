@@ -18,9 +18,9 @@ export function useIntroPhase() {
 
 /** Timings (ms) — adjust to taste */
 const PHASE_TIMINGS: Record<Exclude<IntroPhase, "image">, number> = {
-  viewfinder: 800, // sharp image shows alone for 0.8 s
-  reveal: 2400, // viewfinder shrinks for ~1.6 s
-  done: 3800, // UI staggers in for ~1.4 s
+  viewfinder: 400, // sharp image shows alone for 0.4 s
+  reveal: 1200, // viewfinder shrinks for ~0.8 s
+  done: 2000, // UI staggers in for ~0.8 s
 };
 
 export function IntroProvider({ children }: { children: ReactNode }) {
