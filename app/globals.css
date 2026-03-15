@@ -119,6 +119,37 @@
 }
 
 
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) skewX(-20deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+@utility animate-shine {
+  animation: shine 0.8s ease-out forwards;
+}
+
+@keyframes slow-zoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.4);
+  }
+}
+
+@utility animate-slow-zoom {
+  animation: slow-zoom 6s linear forwards;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

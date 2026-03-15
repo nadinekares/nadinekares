@@ -24,10 +24,10 @@ const bioLines = [
 ];
 
 const aboutImages = [
-  { src: "/images/Nadine Kares_about-image-01.jpg", alt: "Studio work — brand identity", ratio: 3 / 4 },
-  { src: "/images/Nadine Kares_about-image-02.jpeg", alt: "Studio work — web design", ratio: 3 / 2.8 },
-  { src: "/images/Nadine Kares_about-image-03.jpeg", alt: "Studio work — visual direction", ratio: 3 / 2 },
-  { src: "/images/Nadine Kares_about-image-04.jpeg", alt: "Studio work — creative process", ratio: 3 / 1.4 },
+  { src: "/images/Nadine Kares_about-image-01.jpg", alt: "Studio work — brand identity", ratio: 3 / 4, logo: "/images/Logo_Talentir.svg", logoClass: "h-6 md:h-7", href: "https://www.talentir.com" },
+  { src: "/images/Nadine Kares_about-image-02.jpeg", alt: "Studio work — web design", ratio: 3 / 2.8, logo: "/images/Logo_Hotelpartner.svg", logoClass: "h-10 md:h-12", href: "https://hotelpartner.com/de/b-e-quick/" },
+  { src: "/images/Nadine Kares_about-image-03.jpeg", alt: "Studio work — visual direction", ratio: 3 / 2, logo: "/images/Logo_Janet Brantschen.svg", logoClass: "h-5 md:h-6 max-w-[65%]", href: "https://www.janetbrantschen.com" },
+  { src: "/images/Nadine Kares_about-image-04.jpeg", alt: "Studio work — creative process", ratio: 3 / 1.4, logo: "/images/Logo_Bluecode.svg", logoClass: "h-7 md:h-9", href: "https://www.bluecode.com" },
 ];
 
 function Reveal({
@@ -119,8 +119,11 @@ function ImageCard({
   );
 
   return (
-    <motion.div
-      className="relative overflow-hidden bg-muted"
+    <motion.a
+      href={img.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block overflow-hidden bg-muted cursor-pointer"
       style={{ aspectRatio }}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -131,14 +134,27 @@ function ImageCard({
         ease: [0.16, 1, 0.3, 1],
       }}
     >
+      {/* Image with heavy scale + blur on hover */}
       <Image
         src={img.src}
         alt={img.alt}
         fill
-        className="object-cover"
+        className="object-cover transition-[filter] duration-[1200ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:blur-[3px] group-hover:animate-slow-zoom"
         sizes="(max-width: 768px) 50vw, 25vw"
       />
-    </motion.div>
+
+      {/* Dark overlay on hover */}
+      <div className="pointer-events-none absolute inset-0 bg-black/0 transition-[background] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-black/30" />
+
+      {/* Brand logo overlay — fades in on hover */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100">
+        <img
+          src={img.logo}
+          alt=""
+          className={`relative z-10 w-auto max-w-[60%] brightness-0 invert drop-shadow-lg ${img.logoClass}`}
+        />
+      </div>
+    </motion.a>
   );
 }
 
