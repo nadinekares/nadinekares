@@ -21,6 +21,18 @@ function useNavTheme() {
   useEffect(() => {
     const onScroll = () => {
       const navBottom = 80; // approximate nav height in px
+
+      // On pages without light sections (e.g. legal pages), check if body background is light
+      const hasLightSections = LIGHT_SECTIONS.some((id) =>
+        document.getElementById(id)
+      );
+
+      if (!hasLightSections) {
+        // Legal/subpages have a white background — always use dark nav
+        setIsDark(true);
+        return;
+      }
+
       let overLight = false;
 
       for (const id of LIGHT_SECTIONS) {

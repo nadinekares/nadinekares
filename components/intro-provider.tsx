@@ -7,6 +7,7 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 
 export type IntroPhase = "image" | "viewfinder" | "reveal" | "done";
 
@@ -24,9 +25,13 @@ const PHASE_TIMINGS: Record<Exclude<IntroPhase, "image">, number> = {
 };
 
 export function IntroProvider({ children }: { children: ReactNode }) {
-  const [phase, setPhase] = useState<IntroPhase>("image");
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [phase, setPhase] = useState<IntroPhase>(isHome ? "image" : "done");
 
   useEffect(() => {
+    if (!isHome) return;
+
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     timers.push(setTimeout(() => setPhase("viewfinder"), PHASE_TIMINGS.viewfinder));
@@ -42,7 +47,7 @@ export function IntroProvider({ children }: { children: ReactNode }) {
     );
 
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [isHome]);
 
   return (
     <IntroContext.Provider value={phase}>{children}</IntroContext.Provider>

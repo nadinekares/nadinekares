@@ -24,10 +24,10 @@ const bioLines = [
 ];
 
 const aboutImages = [
-  { src: "/images/about-1.jpg", alt: "Studio work — brand identity", ratio: 3 / 4 },
-  { src: "/images/about-2.jpg", alt: "Studio work — web design", ratio: 3 / 3.4 },
-  { src: "/images/about-3.jpg", alt: "Studio work — visual direction", ratio: 3 / 2.8 },
-  { src: "/images/about-4.jpg", alt: "Studio work — creative process", ratio: 3 / 2.2 },
+  { src: "/images/Nadine Kares_about-image-01.jpg", alt: "Studio work — brand identity", ratio: 3 / 4 },
+  { src: "/images/Nadine Kares_about-image-02.jpeg", alt: "Studio work — web design", ratio: 3 / 2.8 },
+  { src: "/images/Nadine Kares_about-image-03.jpeg", alt: "Studio work — visual direction", ratio: 3 / 2 },
+  { src: "/images/Nadine Kares_about-image-04.jpeg", alt: "Studio work — creative process", ratio: 3 / 1.4 },
 ];
 
 function Reveal({
@@ -110,11 +110,12 @@ function ImageCard({
   index: number;
   scrollYProgress: MotionValue<number>;
 }) {
-  // Image 1 stays fixed; others animate from their initial ratio → image 1's ratio
+  // Image 1 stays fixed; others animate toward (but never fully reach) image 1's ratio
+  const endRatio = index === 0 ? img.ratio : img.ratio + (TARGET_RATIO - img.ratio) * 0.85;
   const aspectRatio = useTransform(
     scrollYProgress,
     [0, 1],
-    [img.ratio, index === 0 ? img.ratio : TARGET_RATIO],
+    [img.ratio, endRatio],
   );
 
   return (
