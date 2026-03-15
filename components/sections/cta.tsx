@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { MeshGradient } from "@paper-design/shaders-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -48,22 +48,23 @@ export function Cta() {
       aria-label="Get in Touch"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center">
-        {/* Image background */}
+        {/* Gradient background */}
         <div
           className="absolute inset-0 overflow-hidden will-change-transform"
           style={{
             transform: `scale(${scale})`,
             borderRadius: `${radius}px`,
+            filter: `grayscale(${textProgress})`,
           }}
         >
-          <Image
-            src="/images/cta.jpg"
-            alt="Get in touch"
-            fill
-            className="object-cover"
-            style={{ filter: `grayscale(${textProgress})` }}
-            sizes="100vw"
-            priority={false}
+          <MeshGradient
+            speed={0.31}
+            distortion={0.31}
+            swirl={0}
+            grainMixer={0}
+            grainOverlay={0}
+            colors={["#BDB2C8", "#F49468"]}
+            style={{ width: "100%", height: "100%" }}
           />
           <div
             className="absolute inset-0"

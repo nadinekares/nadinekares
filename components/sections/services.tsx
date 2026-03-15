@@ -111,7 +111,7 @@ export function Services() {
                   animate={{ opacity: 1, scale: 1, rotate: tilt }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   style={{ transformOrigin: "bottom right" }}
-                  className="pointer-events-none absolute right-[10%] top-1/2 z-10 hidden h-[380px] w-[280px] -translate-y-1/2 overflow-hidden rounded-md md:block lg:right-[12%] lg:h-[440px] lg:w-[320px]"
+                  className="pointer-events-none absolute right-[10%] top-1/2 z-10 hidden h-[380px] w-[280px] -translate-y-1/2 overflow-hidden md:block lg:right-[12%] lg:h-[440px] lg:w-[320px]"
                 >
                   <Image
                     src={service.image}

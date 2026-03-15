@@ -215,6 +215,12 @@ When changing or adding custom fonts (especially for `font-heading`):
   - `feature/pricing-section`
   - `feature/lead-form-optimization`
 
+## Dev Server Rules
+- **Never force-kill the Next.js dev server** (`pkill`, `kill -9`, etc.). Always stop it gracefully.
+- If the dev server must be restarted, **always delete `.next/` first** (`rm -rf .next`) before starting a new one. Turbopack's persistent cache corrupts easily when the process is interrupted, causing `localhost` to stop working.
+- Use `bun run dev` to start the dev server. Do not switch to npm/yarn.
+- If the dev server is already running, reuse it — do not start a second instance.
+
 ## Implementation Notes
 - Prefer reusable, composable sections and components.
 - Keep copy structure and layout optimized for conversion-focused landing pages.
