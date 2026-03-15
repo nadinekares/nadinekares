@@ -336,7 +336,7 @@ export function Hero() {
       {/* ── Text labels ── */}
       <div
         className="absolute inset-x-0 z-10 flex w-full justify-between px-6 font-semibold tracking-[0.15em] uppercase font-heading text-primary-foreground md:px-10"
-        style={{ top: "35vh", fontSize: "clamp(0.625rem, 1.1vw, 1rem)" }}
+        style={{ top: "50%", fontSize: "clamp(0.625rem, 1.1vw, 1rem)" }}
       >
         {["Brands", "Websites", "Design", "Vienna / Zurich"].map(
           (label, i) => (
