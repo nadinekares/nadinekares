@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -45,24 +45,91 @@ function useNavTheme() {
   return isDark;
 }
 
+const SCROLL_THRESHOLD = 10;
+
+function useScrollDirection() {
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
+  const anchorY = useRef(0);
+  const direction = useRef<"up" | "down">("up");
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+
+      // Always show nav near the top of the page
+      if (y < 100) {
+        setHidden(false);
+        lastY.current = y;
+        anchorY.current = y;
+        direction.current = "up";
+        return;
+      }
+
+      const diff = y - lastY.current;
+      lastY.current = y;
+
+      // Ignore zero-movement events
+      if (diff === 0) return;
+
+      const newDir = diff > 0 ? "down" : "up";
+
+      // When direction reverses, reset the anchor point
+      if (newDir !== direction.current) {
+        direction.current = newDir;
+        anchorY.current = y;
+      }
+
+      const delta = Math.abs(y - anchorY.current);
+
+      // Only toggle visibility after exceeding threshold
+      if (delta > SCROLL_THRESHOLD) {
+        setHidden(newDir === "down");
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return hidden;
+}
+
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const phase = useIntroPhase();
   const showNav = phase === "reveal" || phase === "done";
+  const introDone = phase === "done";
   const isDark = useNavTheme();
+  const scrollHidden = useScrollDirection();
+  const hideNav = introDone && scrollHidden && !isOpen;
 
   return (
     <header
       className="fixed inset-x-0 top-0 z-50"
       style={{
         opacity: showNav ? 1 : 0,
-        transform: showNav ? "translateY(0)" : "translateY(-20px)",
+        transform: !showNav
+          ? "translateY(-20px)"
+          : hideNav
+            ? "translateY(-100%)"
+            : "translateY(0)",
         transitionProperty: "opacity, transform",
-        transitionDuration: "0.7s",
+        transitionDuration: hideNav ? "0.4s" : "0.7s",
         transitionTimingFunction: "ease-out",
       }}
     >
-      <nav className="flex items-center justify-between px-6 py-5 md:px-10">
+      {/* Gradient overlay + blur for readability */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-36 transition-opacity duration-300"
+        style={{
+          background: isDark
+            ? "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 40%, rgba(255,255,255,0.35) 70%, transparent 100%)"
+            : "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.15) 70%, transparent 100%)",
+        }}
+        aria-hidden="true"
+      />
+      <nav className="relative flex items-center justify-between px-6 py-5 md:px-10">
         {/* Logo — left */}
         <Link
           href="/"
