@@ -222,8 +222,8 @@ export function Hero() {
           alt={lensEnabled ? "" : "Nadine Kares portrait"}
           fill
           priority
-          className={`object-cover transition-[filter] duration-[1400ms] ease-out ${
-            showBlur ? "blur-[10px] scale-[1.03]" : ""
+          className={`object-cover scale-[1.03] transition-[filter] duration-[1400ms] ease-out ${
+            showBlur ? "blur-[10px]" : ""
           }`}
           sizes="100vw"
           quality={80}
@@ -231,6 +231,8 @@ export function Hero() {
           blurDataURL={HERO_BLUR_DATA_URL}
           aria-hidden={lensEnabled}
         />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/15" />
       </div>
 
       {/* ── Layer 2: Sharp image with clip-path (viewfinder effect — desktop) ── */}
@@ -251,7 +253,7 @@ export function Hero() {
             alt=""
             fill
             priority
-            className="object-cover"
+            className="object-cover scale-[1.03]"
             sizes="100vw"
             quality={80}
             aria-hidden
@@ -284,7 +286,7 @@ export function Hero() {
           <div
             className="absolute inset-0 flex items-center justify-center"
             style={{
-              opacity: phase === "viewfinder" ? 1 : 0,
+              opacity: showViewfinder ? 1 : 0,
               transitionProperty: "opacity",
               transitionDuration: "0.4s",
               transitionTimingFunction: "ease",
@@ -322,7 +324,7 @@ export function Hero() {
               alt="Nadine Kares portrait"
               fill
               loading="eager"
-              className="object-cover"
+              className="object-cover scale-[1.03]"
               sizes="100vw"
               quality={80}
             />
