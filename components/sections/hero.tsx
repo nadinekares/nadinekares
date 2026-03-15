@@ -62,14 +62,25 @@ export function Hero() {
     const el = textRef.current;
     if (!el) return;
 
+    // Read padding from CSS classes (px-6 / md:px-10) before overriding styles
+    const computed = getComputedStyle(el);
+    const padL = parseFloat(computed.paddingLeft) || 0;
+    const padR = parseFloat(computed.paddingRight) || 0;
+    const availableWidth = window.innerWidth - padL - padR;
+
+    // Measure intrinsic text width at reference size (strip padding temporarily)
     el.style.fontSize = "100px";
     el.style.display = "inline";
     el.style.position = "static";
+    el.style.paddingLeft = "0";
+    el.style.paddingRight = "0";
     const textWidth = el.getBoundingClientRect().width;
     el.style.display = "";
     el.style.position = "";
+    el.style.paddingLeft = "";
+    el.style.paddingRight = "";
 
-    const scale = window.innerWidth / textWidth;
+    const scale = availableWidth / textWidth;
     el.style.fontSize = `${100 * scale}px`;
   }, []);
 
@@ -344,7 +355,7 @@ export function Hero() {
 
       {/* ── Text labels ── */}
       <div
-        className="absolute inset-x-0 z-10 flex w-full justify-between px-6 font-semibold tracking-[0.15em] uppercase font-heading text-primary-foreground md:px-10"
+        className="absolute inset-x-0 z-10 flex w-full justify-between px-6 font-normal tracking-[0.1em] uppercase font-label text-primary-foreground md:px-10"
         style={{ top: "50%", fontSize: "clamp(0.625rem, 1.1vw, 1rem)" }}
       >
         {["Brands", "Websites", "Design", "Vienna / Zurich"].map(
@@ -369,8 +380,9 @@ export function Hero() {
       {/* ── Name overlay ── */}
       <h1
         ref={textRef}
-        className="absolute inset-x-0 bottom-0 z-10 w-full whitespace-nowrap font-heading leading-[0.8] tracking-tight text-primary-foreground"
+        className="absolute inset-x-0 bottom-0 z-10 w-full whitespace-nowrap px-6 font-heading leading-[0.8] tracking-tight text-primary-foreground md:px-10"
         style={{
+          textIndent: "-0.07em",
           opacity: showUI ? 1 : 0,
           transform: showUI ? "translateY(0)" : "translateY(40px)",
           transitionProperty: "opacity, transform",

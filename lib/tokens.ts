@@ -107,6 +107,12 @@ export const fonts: FontToken[] = [
     cssVar: "--font-heading",
     stack: '"Safiro", ui-sans-serif, system-ui, sans-serif',
   },
+  {
+    name: "Label (GeistMono)",
+    twClass: "font-label",
+    cssVar: "--font-label",
+    stack: '"GeistMono", Arial, sans-serif',
+  },
 ];
 
 export const fontSizes = [
@@ -144,7 +150,7 @@ export const headingHierarchy = [
 ];
 
 export const typographyStyles = [
-  { name: "Tag", cls: "text-xs font-semibold tracking-[0.15em] uppercase font-heading", description: "text-xs font-semibold tracking-[0.15em] uppercase" },
+  { name: "Tag", cls: "text-xs font-normal tracking-[0.1em] uppercase font-label", description: "text-xs font-normal tracking-[0.1em] uppercase" },
 ];
 
 export const trackingValues = [

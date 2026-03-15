@@ -3,9 +3,9 @@
 import { motion } from "motion/react";
 
 const stats = [
-  { value: "10+", label: "Years Experience" },
-  { value: "50+", label: "Projects" },
-  { value: "30+", label: "Clients" },
+  { value: "10", label: "Years of Experience" },
+  { value: "50", label: "Projects" },
+  { value: "30", label: "Clients" },
 ];
 
 export function About() {
@@ -14,7 +14,7 @@ export function About() {
       <div className="md:grid md:grid-cols-12 md:gap-8">
         {/* Left — tag */}
         <motion.span
-          className="mb-8 block text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground font-heading md:col-span-3 md:mb-0"
+          className="mb-8 block text-xs font-normal uppercase tracking-[0.1em] text-muted-foreground font-label md:col-span-3 md:mb-0"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -26,7 +26,7 @@ export function About() {
         {/* Right — bio + stats */}
         <div className="md:col-span-8 md:col-start-5">
           <motion.p
-            className="max-w-2xl text-lg leading-relaxed text-foreground md:text-xl"
+            className="max-w-2xl text-xl leading-relaxed text-foreground md:text-2xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -40,7 +40,7 @@ export function About() {
 
           {/* Stats */}
           <motion.div
-            className="mt-12 grid grid-cols-3 gap-6 border-t border-border pt-12 md:mt-16 md:gap-8 md:pt-16"
+            className="mt-8 grid grid-cols-3 gap-6 pt-12 md:mt-12 md:gap-8 md:pt-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -48,10 +48,11 @@ export function About() {
           >
             {stats.map((stat) => (
               <div key={stat.label}>
-                <span className="block text-3xl font-heading tracking-tight text-foreground md:text-4xl">
-                  {stat.value}
+                <span className="block font-heading tracking-tight text-foreground">
+                  <span className="text-5xl md:text-7xl">{stat.value}</span>
+                  <sup className="relative -top-8 ml-0.5 text-xl font-semibold md:-top-9 md:text-2xl">+</sup>
                 </span>
-                <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground font-heading">
+                <span className="mt-2 block text-xs font-normal uppercase tracking-[0.1em] text-muted-foreground font-label">
                   {stat.label}
                 </span>
               </div>

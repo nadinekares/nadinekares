@@ -51,7 +51,7 @@ export function Navigation() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-xs font-semibold tracking-[0.15em] uppercase font-copy text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                className="text-xs font-normal tracking-[0.1em] uppercase font-label text-primary-foreground/80 transition-colors hover:text-primary-foreground"
               >
                 {link.label}
               </Link>
@@ -116,7 +116,7 @@ export function Navigation() {
                   <Link
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl font-semibold tracking-[0.1em] uppercase font-copy text-primary-foreground"
+                    className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
                   >
                     {link.label}
                   </Link>
