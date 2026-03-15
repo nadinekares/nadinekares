@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -49,15 +48,15 @@ export function Navigation() {
         </ul>
 
         {/* Contact — right (desktop) */}
-        <Link
-          href="#contact"
-          className={cn(
-            buttonVariants({ variant: "default", size: "sm" }),
-            "hidden text-xs font-semibold tracking-[0.15em] uppercase font-copy md:inline-flex",
-          )}
+        <Button
+          variant="default"
+          size="sm"
+          nativeButton={false}
+          className="hidden text-xs md:inline-flex"
+          render={<Link href="#contact" />}
         >
           Contact
-        </Link>
+        </Button>
 
         {/* Hamburger — right (mobile) */}
         <button

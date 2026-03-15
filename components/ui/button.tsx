@@ -10,7 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        default: "bg-primary text-primary-foreground",
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -46,14 +46,33 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  children,
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+  const hasSlide = variant !== "link"
+
   return (
     <ButtonPrimitive
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {hasSlide ? (
+        <span className="relative inline-flex items-center overflow-clip">
+          <span className="inline-flex items-center gap-1.5 transition-transform duration-300 ease-out group-hover/button:-translate-y-full">
+            {children}
+          </span>
+          <span
+            className="absolute inset-x-0 top-0 inline-flex items-center justify-center gap-1.5 translate-y-full transition-transform duration-300 ease-out group-hover/button:translate-y-0"
+            aria-hidden="true"
+          >
+            {children}
+          </span>
+        </span>
+      ) : (
+        children
+      )}
+    </ButtonPrimitive>
   )
 }
 
