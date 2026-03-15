@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -8,14 +8,48 @@ import { useIntroPhase } from "@/components/intro-provider";
 
 const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Service", href: "#service" },
-  { label: "Portfolio", href: "#portfolio" },
+  { label: "Services", href: "#services" },
+  { label: "Portfolio", href: "#projects" },
 ];
+
+/** Section IDs that have a white / light background. */
+const LIGHT_SECTIONS = ["about", "services", "projects"];
+
+function useNavTheme() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const navBottom = 80; // approximate nav height in px
+      let overLight = false;
+
+      for (const id of LIGHT_SECTIONS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        // nav overlaps this section if section top is above navBottom and section bottom is below 0
+        if (rect.top < navBottom && rect.bottom > 0) {
+          overLight = true;
+          break;
+        }
+      }
+
+      setIsDark(overLight);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return isDark;
+}
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const phase = useIntroPhase();
   const showNav = phase === "reveal" || phase === "done";
+  const isDark = useNavTheme();
 
   return (
     <header
@@ -32,7 +66,9 @@ export function Navigation() {
         {/* Logo — left */}
         <Link
           href="/"
-          className="relative z-50 text-primary-foreground"
+          className={`relative z-50 transition-colors duration-300 ${
+            isDark && !isOpen ? "text-foreground" : "text-primary-foreground"
+          }`}
           aria-label="Nadine Kares — Home"
         >
           <svg
@@ -51,7 +87,11 @@ export function Navigation() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-xs font-normal tracking-[0.1em] uppercase font-label text-primary-foreground/80 transition-colors hover:text-primary-foreground"
+                className={`text-xs font-normal tracking-[0.1em] uppercase font-label transition-colors duration-300 ${
+                  isDark
+                    ? "text-foreground/70 hover:text-foreground"
+                    : "text-primary-foreground/80 hover:text-primary-foreground"
+                }`}
               >
                 {link.label}
               </Link>
@@ -61,7 +101,7 @@ export function Navigation() {
 
         {/* Contact — right (desktop) */}
         <Button
-          variant="default"
+          variant={isDark ? "outline" : "default"}
           size="sm"
           nativeButton={false}
           className="hidden text-xs md:inline-flex"
@@ -78,19 +118,19 @@ export function Navigation() {
           aria-expanded={isOpen}
         >
           <span
-            className={`block h-[1.5px] w-5 bg-primary-foreground transition-all duration-300 ${
-              isOpen ? "translate-y-[6.5px] rotate-45" : ""
-            }`}
+            className={`block h-[1.5px] w-5 transition-all duration-300 ${
+              isDark && !isOpen ? "bg-foreground" : "bg-primary-foreground"
+            } ${isOpen ? "translate-y-[6.5px] rotate-45" : ""}`}
           />
           <span
-            className={`block h-[1.5px] w-5 bg-primary-foreground transition-opacity duration-300 ${
-              isOpen ? "opacity-0" : ""
-            }`}
+            className={`block h-[1.5px] w-5 transition-all duration-300 ${
+              isDark && !isOpen ? "bg-foreground" : "bg-primary-foreground"
+            } ${isOpen ? "opacity-0" : ""}`}
           />
           <span
-            className={`block h-[1.5px] w-5 bg-primary-foreground transition-all duration-300 ${
-              isOpen ? "-translate-y-[6.5px] -rotate-45" : ""
-            }`}
+            className={`block h-[1.5px] w-5 transition-all duration-300 ${
+              isDark && !isOpen ? "bg-foreground" : "bg-primary-foreground"
+            } ${isOpen ? "-translate-y-[6.5px] -rotate-45" : ""}`}
           />
         </button>
       </nav>

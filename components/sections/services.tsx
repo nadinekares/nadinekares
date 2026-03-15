@@ -64,10 +64,12 @@ export function Services() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [tilt, setTilt] = useState(0);
 
+  const baseTilt = -3; // always tilted slightly to the left
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width; // 0 → 1
-    setTilt((x - 0.5) * 16); // −8° to +8°
+    // base tilt + extra ±8° from mouse position
+    setTilt(baseTilt + (x - 0.5) * 16);
   }
 
   return (
