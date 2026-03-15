@@ -9,6 +9,7 @@ import {
   fontSizes,
   fontWeights,
   headingHierarchy,
+  typographyStyles,
   trackingValues,
   leadingValues,
   spacingScale,
@@ -252,6 +253,25 @@ export default function StyleguidePage() {
             </div>
           </div>
 
+          {/* Typography Styles — auto-generated from tokens */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-medium text-foreground">
+              Typography Styles
+            </h3>
+            <div className="space-y-6 rounded-lg border border-border p-6">
+              {typographyStyles.map((item) => (
+                <div key={item.name}>
+                  <p className="mb-1 font-heading text-xs text-muted-foreground">
+                    {item.name} &mdash; {item.description}
+                  </p>
+                  <p className={`${item.cls} text-foreground`}>
+                    {item.name} Sample
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Tracking — auto-generated from tokens */}
           <div className="space-y-6">
             <h3 className="text-lg font-medium text-foreground">
@@ -482,6 +502,9 @@ export default function StyleguidePage() {
                 />
                 <span className="font-heading text-xs text-muted-foreground">
                   {item.label}
+                </span>
+                <span className="font-heading text-[10px] text-muted-foreground/60">
+                  {item.px}
                 </span>
               </div>
             ))}

@@ -46,6 +46,8 @@ export interface RadiusToken {
   label: string;
   twClass: string;
   cssVar: string;
+  /** Computed pixel value for display */
+  px: string;
 }
 
 // ─── COLORS ──────────────────────────────────────────────────
@@ -141,6 +143,10 @@ export const headingHierarchy = [
   { tag: "h6", cls: "text-lg font-medium", description: "text-lg font-medium" },
 ];
 
+export const typographyStyles = [
+  { name: "Tag", cls: "text-xs font-semibold tracking-[0.15em] uppercase font-heading", description: "text-xs font-semibold tracking-[0.15em] uppercase" },
+];
+
 export const trackingValues = [
   { cls: "tracking-tighter", label: "tracking-tighter", val: "-0.05em" },
   { cls: "tracking-tight", label: "tracking-tight", val: "-0.025em" },
@@ -194,13 +200,13 @@ export const gapExamples = [
 // ─── BORDER RADIUS ───────────────────────────────────────────
 
 export const radiusScale: RadiusToken[] = [
-  { label: "rounded-sm", twClass: "rounded-sm", cssVar: "var(--radius-sm)" },
-  { label: "rounded-md", twClass: "rounded-md", cssVar: "var(--radius-md)" },
-  { label: "rounded-lg", twClass: "rounded-lg", cssVar: "var(--radius-lg)" },
-  { label: "rounded-xl", twClass: "rounded-xl", cssVar: "var(--radius-xl)" },
-  { label: "rounded-2xl", twClass: "rounded-2xl", cssVar: "var(--radius-2xl)" },
-  { label: "rounded-3xl", twClass: "rounded-3xl", cssVar: "var(--radius-3xl)" },
-  { label: "rounded-full", twClass: "rounded-full", cssVar: "9999px" },
+  { label: "rounded-sm", twClass: "rounded-sm", cssVar: "var(--radius-sm)", px: "4px" },
+  { label: "rounded-md", twClass: "rounded-md", cssVar: "var(--radius-md)", px: "8px" },
+  { label: "rounded-lg", twClass: "rounded-lg", cssVar: "var(--radius-lg)", px: "10px" },
+  { label: "rounded-xl", twClass: "rounded-xl", cssVar: "var(--radius-xl)", px: "14px" },
+  { label: "rounded-2xl", twClass: "rounded-2xl", cssVar: "var(--radius-2xl)", px: "18px" },
+  { label: "rounded-3xl", twClass: "rounded-3xl", cssVar: "var(--radius-3xl)", px: "22px" },
+  { label: "rounded-full", twClass: "rounded-full", cssVar: "9999px", px: "9999px" },
 ];
 
 // ─── GRID ────────────────────────────────────────────────────

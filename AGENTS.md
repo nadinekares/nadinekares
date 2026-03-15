@@ -73,16 +73,39 @@ The page must have a sticky navigation bar linking to each section. Every elemen
 **Token Sync Rule (CRITICAL)**: Whenever a design token is added, removed, or changed — regardless of which file the change originates in — ALL THREE files must be kept in sync:
 1. `lib/tokens.ts` — the token definition (name, CSS var, Tailwind class, value)
 2. `app/globals.css` — the CSS custom property in `:root` AND the `@theme inline` mapping (if applicable)
-3. `app/styleguide/page.tsx` — only if structural changes are needed (e.g. a new section); data-driven sections update automatically via token imports
+3. `app/styleguide/page.tsx` — MUST import new token arrays and add corresponding render sections
 
-Examples:
+**Styleguide Auto-Import Pattern**: The styleguide uses imports + `.map()` rendering to display tokens. When adding a new token array to `lib/tokens.ts`:
+1. **Export the array** from `lib/tokens.ts` (e.g. `export const typographyStyles = [...]`)
+2. **Import it** at the top of `app/styleguide/page.tsx` in the existing import statement
+3. **Add a render section** with the same pattern as other sections (e.g. colors, typography, buttons):
+   ```jsx
+   <div className="space-y-6">
+     <h3 className="text-lg font-medium text-foreground">Section Name</h3>
+     <div className="space-y-6 rounded-lg border border-border p-6">
+       {arrayName.map((item) => (
+         <div key={item.uniqueKey}>
+           <p className="mb-1 font-heading text-xs text-muted-foreground">
+             {item.displayName} — {item.description}
+           </p>
+           <p className={`${item.cls} text-foreground`}>
+             Display Text
+           </p>
+         </div>
+       ))}
+     </div>
+   </div>
+   ```
+
+**Examples:**
 - **Adding a new color** (e.g. `--success`): Add to `themeColors` array in `lib/tokens.ts`, add `--success: oklch(...)` to `:root` in `globals.css`, add `--color-success: var(--success)` to `@theme inline` in `globals.css`. The styleguide picks it up automatically.
 - **Changing a color value** (e.g. `--primary`): Update the `value` field in `lib/tokens.ts` AND the `:root` property in `globals.css`. The styleguide and all components update automatically.
 - **Adding a new font family**: Add to `fonts` array in `lib/tokens.ts`, add the `--font-*` variable to `@theme inline` in `globals.css`. The styleguide picks it up automatically.
+- **Adding a new typography style** (e.g. `typographyStyles`): Add array to `lib/tokens.ts`, import it in `app/styleguide/page.tsx`, add a render section with `.map()`. The styleguide displays it automatically.
 - **Adding a new spacing/radius/shadow token**: Add to the relevant array in `lib/tokens.ts`. If it needs a custom CSS variable, also add to `globals.css`.
 - **Renaming a token**: Update all three files and search the codebase for any component using the old name.
 
-Never leave these files out of sync. When in doubt, update all three.
+Never leave these files out of sync. When in doubt, update all three and verify the styleguide reflects your changes.
 
 ## Component Library Page
 
