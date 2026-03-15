@@ -48,7 +48,7 @@ export function HeroVariantB() {
             transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
             className="mt-8 max-w-sm text-sm leading-relaxed text-muted-foreground"
           >
-            Crafting distinctive brand identities and digital experiences
+            I craft distinctive brand identities and digital experiences
             that elevate your vision.
           </motion.p>
 

@@ -17,9 +17,9 @@ const stats = [
 ];
 
 const bioLines = [
-  "Nadine Kares is a creative studio specializing in brand identity",
-  "and web design. Based between Vienna and Zurich, we craft distinctive",
-  "visual experiences that connect brands with their audience —",
+  "I'm a designer specializing in brand identity and web design.",
+  "Based between Vienna and Zurich, I craft distinctive visual",
+  "experiences that connect brands with their audience —",
   "with precision, clarity, and a sharp eye for detail.",
 ];
 
@@ -86,7 +86,7 @@ function LineByLineReveal({
                 : { y: "100%", opacity: 0 }
             }
             transition={{
-              duration: 0.7,
+              duration: 1.2,
               delay: baseDelay + i * stagger,
               ease: [0.16, 1, 0.3, 1],
             }}
@@ -165,7 +165,7 @@ export function About() {
             lines={bioLines}
             className="text-xl leading-relaxed text-foreground md:text-2xl"
             baseDelay={0.1}
-            stagger={0.08}
+            stagger={0.12}
           />
 
           {/* Stats */}
