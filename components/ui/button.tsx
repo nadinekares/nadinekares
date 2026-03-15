@@ -59,11 +59,11 @@ function Button({
     >
       {hasSlide ? (
         <span className="relative inline-flex items-center overflow-clip">
-          <span className="inline-flex items-center gap-1.5 transition-transform duration-300 ease-out group-hover/button:-translate-y-full">
+          <span className="inline-flex items-center gap-1.5 transition-transform duration-300 ease-out group-hover/button:-translate-y-full group-active/button:-translate-y-full">
             {children}
           </span>
           <span
-            className="absolute inset-x-0 top-0 inline-flex items-center justify-center gap-1.5 translate-y-full transition-transform duration-300 ease-out group-hover/button:translate-y-0"
+            className="absolute inset-x-0 top-0 inline-flex items-center justify-center gap-1.5 translate-y-full transition-transform duration-300 ease-out group-hover/button:translate-y-0 group-active/button:translate-y-0"
             aria-hidden="true"
           >
             {children}

@@ -254,9 +254,12 @@ When changing or adding custom fonts (especially for `font-heading`):
 - Add alt text for meaningful images and labels for form controls.
 
 ### Performance and SEO
+- **Always optimize for loading speed.** Every code change must consider performance impact. Prefer fast, lightweight solutions over heavy ones.
 - Optimize Core Web Vitals (especially LCP and CLS).
-- Use `next/image` for responsive image delivery.
-- Compress/resize media assets before shipping (and ideally before committing them).
+- Use `next/image` for responsive image delivery with explicit `quality`, `sizes`, and `placeholder="blur"` (with `blurDataURL`) for above-the-fold images.
+- Never use `priority` on images that are not immediately visible (e.g. lazy-loaded, behind interactions, below the fold).
+- Compress/resize media assets before shipping (and ideally before committing them). Maximum source image width: 2560px. Strip EXIF metadata.
+- Preload critical fonts used above the fold via `<link rel="preload">` in the layout.
 - Keep bundle size lean; avoid unnecessary dependencies.
 - Add metadata, Open Graph tags, and structured page titles/descriptions.
 

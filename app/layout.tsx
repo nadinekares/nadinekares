@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Navigation } from "@/components/navigation";
+import { IntroProvider } from "@/components/intro-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,11 +21,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/safiro/Safiro-SemiBold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/safiro/Safiro-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} antialiased`}
       >
-        <Navigation />
-        {children}
+        <IntroProvider>
+          <Navigation />
+          {children}
+        </IntroProvider>
       </body>
     </html>
   );

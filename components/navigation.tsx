@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
+import { useIntroPhase } from "@/components/intro-provider";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -13,9 +14,20 @@ const navLinks = [
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const phase = useIntroPhase();
+  const showNav = phase === "reveal" || phase === "done";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header
+      className="fixed inset-x-0 top-0 z-50"
+      style={{
+        opacity: showNav ? 1 : 0,
+        transform: showNav ? "translateY(0)" : "translateY(-20px)",
+        transitionProperty: "opacity, transform",
+        transitionDuration: "0.7s",
+        transitionTimingFunction: "ease-out",
+      }}
+    >
       <nav className="flex items-center justify-between px-6 py-5 md:px-10">
         {/* Logo — left */}
         <Link
