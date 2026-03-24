@@ -70,8 +70,6 @@ export function Footer() {
                 <li>
                   <a
                     href="mailto:design@nadinekares.at"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-sm text-white/70 transition-colors hover:text-white"
                   >
                     design@nadinekares.at

@@ -120,8 +120,6 @@ export function CalPicker({
             {/* Email fallback */}
             <motion.a
               href="mailto:design@nadinekares.at"
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.25 }}
