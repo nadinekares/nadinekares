@@ -169,8 +169,8 @@ export function Services() {
                       : ""
                   } ${
                     scrollActiveIndex !== null && scrollActiveIndex !== i
-                      ? "text-muted-foreground/40 md:text-muted-foreground"
-                      : "text-muted-foreground"
+                      ? "text-muted-foreground/40"
+                      : "text-muted-foreground/40"
                   } ${
                     hoveredIndex === null || hoveredIndex === i
                       ? "md:group-hover:text-foreground"
@@ -186,8 +186,8 @@ export function Services() {
                 <span
                   className={`text-xs font-normal font-label transition-colors duration-700 ${
                     scrollActiveIndex !== null && scrollActiveIndex !== i
-                      ? "text-muted-foreground/40 md:text-muted-foreground"
-                      : "text-muted-foreground"
+                      ? "text-muted-foreground/40"
+                      : "text-muted-foreground/40"
                   } ${
                     hoveredIndex !== null && hoveredIndex !== i
                       ? "md:text-muted-foreground/40"
