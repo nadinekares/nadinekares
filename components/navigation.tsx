@@ -22,10 +22,13 @@ const socialLinks = [
 /** Section IDs that have a white / light background. */
 const LIGHT_SECTIONS = ["about", "services", "projects"];
 
-function useNavTheme() {
+function useNavTheme(introReady: boolean) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    // Keep the white-on-dark nav until the intro animation is done
+    if (!introReady) return;
+
     const onScroll = () => {
       const navBottom = 80; // approximate nav height in px
 
@@ -57,7 +60,7 @@ function useNavTheme() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [introReady]);
 
   return isDark;
 }
@@ -184,7 +187,7 @@ export function Navigation() {
   const phase = useIntroPhase();
   const showNav = phase === "reveal" || phase === "done";
   const introDone = phase === "done";
-  const isDark = useNavTheme();
+  const isDark = useNavTheme(introDone);
   const scrollHidden = useScrollDirection();
   const hideNav = introDone && scrollHidden && !isOpen;
 
