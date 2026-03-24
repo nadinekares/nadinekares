@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
+import { Reveal } from "@/components/ui/reveal";
 
 /* ─── Logo Marquee ────────────────────────────────────────── */
 
@@ -63,33 +63,6 @@ function LogoMarquee({ title }: { title: string }) {
         </motion.div>
       </div>
     </section>
-  );
-}
-
-/* ─── Reveal helper ───────────────────────────────────────── */
-
-function Reveal({
-  children,
-  delay = 0,
-  className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
-
-  return (
-    <div ref={ref} className={className} style={{ overflow: "hidden" }}>
-      <motion.div
-        initial={{ y: "100%" }}
-        animate={inView ? { y: 0 } : { y: "100%" }}
-        transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {children}
-      </motion.div>
-    </div>
   );
 }
 

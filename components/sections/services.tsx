@@ -1,8 +1,9 @@
 "use client";
 
-import { type ReactNode, useRef, useState, useEffect } from "react";
-import { motion, useInView } from "motion/react";
+import { useState } from "react";
+import { motion } from "motion/react";
 import Image from "next/image";
+import { Reveal } from "@/components/ui/reveal";
 
 const services = [
   {
@@ -22,39 +23,6 @@ const services = [
     image: "/images/services/no-code-dev.jpg",
   },
 ];
-
-function Reveal({
-  children,
-  delay = 0,
-  className,
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
-  const [animationDone, setAnimationDone] = useState(false);
-
-  useEffect(() => {
-    if (inView) {
-      const timeout = setTimeout(() => setAnimationDone(true), (delay + 0.7) * 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [inView, delay]);
-
-  return (
-    <div ref={ref} className={className} style={{ overflow: animationDone ? "visible" : "hidden" }}>
-      <motion.div
-        initial={{ y: "100%" }}
-        animate={inView ? { y: 0 } : { y: "100%" }}
-        transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
 
 export function Services() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -93,7 +61,7 @@ export function Services() {
       {/* Service list */}
       <div className="mt-12 md:mt-16">
         {services.map((service, i) => (
-          <Reveal key={service.name} delay={0.2 + i * 0.1}>
+          <Reveal key={service.name} delay={0.2 + i * 0.1} overflowAfter>
             <div
               className="group relative cursor-pointer py-6 md:py-8"
               onMouseEnter={() => setHoveredIndex(i)}

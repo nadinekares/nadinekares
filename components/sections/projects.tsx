@@ -1,35 +1,11 @@
 "use client";
 
-import { type ReactNode, useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
-
-function Reveal({
-  children,
-  delay = 0,
-  className,
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true });
-
-  return (
-    <div ref={ref} className={className} style={{ overflow: "hidden" }}>
-      <motion.div
-        initial={{ y: "100%" }}
-        animate={inView ? { y: 0 } : { y: "100%" }}
-        transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
+import { Reveal } from "@/components/ui/reveal";
 
 function ProjectCard({ project, index }: { project: (typeof projects)[number]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
