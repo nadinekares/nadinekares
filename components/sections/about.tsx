@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { type MotionValue, motion, useInView, useScroll, useTransform } from "motion/react";
 import { Reveal } from "@/components/ui/reveal";
@@ -89,6 +89,18 @@ function WordByWordReveal({
 
 const TARGET_RATIO = aboutImages[0].ratio; // 3/4 — tallest image
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isDesktop;
+}
+
 function ImageCard({
   img,
   index,
@@ -98,9 +110,14 @@ function ImageCard({
   index: number;
   scrollYProgress: MotionValue<number>;
 }) {
-  // Image 1 stays fixed; others animate toward (but never fully reach) image 1's ratio
+  const isDesktop = useIsDesktop();
+
+  // Desktop: scroll-driven staggered height animation
   const endRatio = index === 0 ? img.ratio : img.ratio + (TARGET_RATIO - img.ratio) * 0.85;
-  const aspectRatio = useTransform(scrollYProgress, [0, 1], [img.ratio, endRatio]);
+  const animatedRatio = useTransform(scrollYProgress, [0, 1], [img.ratio, endRatio]);
+
+  // Mobile (2x2 grid): fixed uniform ratio, no animation
+  const MOBILE_RATIO = 3 / 4;
 
   return (
     <motion.a
@@ -108,13 +125,13 @@ function ImageCard({
       target="_blank"
       rel="noopener noreferrer"
       className="group relative block overflow-hidden bg-muted cursor-pointer"
-      style={{ aspectRatio }}
-      initial={{ opacity: 0, y: 24 }}
+      style={{ aspectRatio: isDesktop ? animatedRatio : MOBILE_RATIO }}
+      initial={{ opacity: 0, y: isDesktop ? 24 : 0 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{
         duration: 0.7,
-        delay: index * 0.1,
+        delay: isDesktop ? index * 0.1 : 0,
         ease: [0.16, 1, 0.3, 1],
       }}
     >
@@ -216,7 +233,7 @@ export function About() {
       {/* Image row — full width, 4 columns, scroll-driven height growth */}
       <div
         ref={imageRowRef}
-        className="relative mt-16 grid grid-cols-2 items-end gap-2 md:mt-24 md:grid-cols-4 md:gap-4"
+        className="relative mt-16 grid grid-cols-2 items-start gap-2 md:mt-24 md:grid-cols-4 md:items-end md:gap-4"
       >
         {aboutImages.map((img, i) => (
           <ImageCard key={img.src} img={img} index={i} scrollYProgress={scrollYProgress} />
