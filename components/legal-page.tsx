@@ -58,14 +58,21 @@ function parseMarkdown(content: string) {
 }
 
 function renderInlineMarkdown(text: string) {
-  // Split on **bold** and render
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  // Split on **bold** and email addresses, then render
+  const parts = text.split(/(\*\*[^*]+\*\*|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={i} className="font-semibold text-foreground">
           {part.slice(2, -2)}
         </strong>
+      );
+    }
+    if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part)) {
+      return (
+        <a key={i} href={`mailto:${part}`} className="underline hover:text-foreground transition-colors">
+          {part}
+        </a>
       );
     }
     return part;

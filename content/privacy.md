@@ -11,7 +11,9 @@ I take your privacy seriously and am committed to protecting your personal data 
 ## 2. Controller
 
 Nadine Kares
-design@nadinekares.com
+Obere Augartenstraße 74/20
+1020 Vienna, Austria
+design@nadinekares.at
 
 ## 3. Data Collection
 
@@ -56,7 +58,7 @@ Under the GDPR, you have the following rights:
 - **Right to object** — You can object to the processing of your data.
 - **Right to withdraw consent** — You can withdraw consent at any time.
 
-To exercise any of these rights, please contact me at design@nadinekares.com.
+To exercise any of these rights, please contact me at design@nadinekares.at.
 
 ## 8. Data Retention
 
@@ -75,4 +77,6 @@ I reserve the right to update this Privacy Policy at any time. The current versi
 If you have any questions about this Privacy Policy, please contact me at:
 
 Nadine Kares
-Email: design@nadinekares.com
+Obere Augartenstraße 74/20
+1020 Vienna, Austria
+Email: design@nadinekares.at

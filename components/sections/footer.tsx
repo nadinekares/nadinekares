@@ -70,10 +70,10 @@ export function Footer() {
               <ul className="mt-3 flex flex-col gap-2">
                 <li>
                   <a
-                    href="mailto:design@nadinekares.com"
+                    href="mailto:design@nadinekares.at"
                     className="text-sm text-white/70 transition-colors hover:text-white"
                   >
-                    design@nadinekares.com
+                    design@nadinekares.at
                   </a>
                 </li>
                 <li>

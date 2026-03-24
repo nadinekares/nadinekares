@@ -82,7 +82,7 @@ export function Cta() {
             Let&apos;s Work Together.
           </h2>
           <a
-            href="mailto:hello@nadinekares.com"
+            href="mailto:design@nadinekares.at"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
               "border-white/90 bg-white/10 text-white backdrop-blur-[4px] hover:border-white/90 hover:bg-white hover:text-black",
