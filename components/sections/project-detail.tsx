@@ -115,10 +115,10 @@ export function ProjectDetail({ project }: { project: Project }) {
               {project.stats.map((stat, i) => (
                 <Reveal key={stat.label} delay={0.05 * (i + 1)}>
                   <div className="flex justify-between">
-                    <span className="text-xs font-normal uppercase tracking-[0.1em] text-muted-foreground font-label">
+                    <span className="text-xs font-normal uppercase tracking-[0.1em] text-muted-foreground font-label shrink-0">
                       {stat.label}
                     </span>
-                    <span className="text-sm text-foreground">
+                    <span className="text-sm text-foreground text-right pl-6">
                       {stat.value}
                     </span>
                   </div>
