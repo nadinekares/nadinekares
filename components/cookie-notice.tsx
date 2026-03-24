@@ -25,9 +25,9 @@ export function CookieNotice() {
     <div
       role="region"
       aria-label="Cookie notice"
-      className="fixed bottom-0 inset-x-0 z-[90] border-t border-border bg-background/95 px-6 py-2.5 backdrop-blur-sm"
+      className="fixed bottom-4 left-4 z-[90] max-w-xs rounded-lg border border-border bg-background/95 px-4 py-3 shadow-lg backdrop-blur-sm"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
+      <div className="flex items-center gap-3">
         <p className="text-xs text-muted-foreground">
           Only essential cookies.{" "}
           <a href="/privacy" className="underline hover:text-foreground">
