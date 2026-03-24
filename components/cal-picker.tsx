@@ -120,10 +120,12 @@ export function CalPicker({
             {/* Email fallback */}
             <motion.a
               href="mailto:design@nadinekares.at"
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.25 }}
-              onClick={onClose}
+              onClick={() => setTimeout(onClose, 100)}
               className="mt-4 block w-full text-center text-sm text-white/40 transition-colors hover:text-white/70"
             >
               Write an email instead
