@@ -11,12 +11,8 @@ const stats = [
   { value: "30", label: "Clients" },
 ];
 
-const bioLines = [
-  "I'm a designer specializing in brand identity and web design.",
-  "Based between Vienna and Zurich, I craft distinctive visual",
-  "experiences that connect brands with their audience —",
-  "with precision, clarity, and a sharp eye for detail.",
-];
+const bioText =
+  "I'm a designer specializing in brand identity and web design. Based between Vienna and Zurich, I craft distinctive visual experiences that connect brands with their audience — with precision, clarity, and a sharp eye for detail.";
 
 const aboutImages = [
   {
@@ -53,36 +49,38 @@ const aboutImages = [
   },
 ];
 
-function LineByLineReveal({
-  lines,
+function WordByWordReveal({
+  text,
   className,
   baseDelay = 0,
-  stagger = 0.08,
+  stagger = 0.02,
 }: {
-  lines: string[];
+  text: string;
   className?: string;
   baseDelay?: number;
   stagger?: number;
 }) {
   const ref = useRef<HTMLParagraphElement>(null);
   const inView = useInView(ref, { once: true, margin: "-10%" });
+  const words = text.split(" ");
 
   return (
     <p ref={ref} className={className}>
-      {lines.map((line, i) => (
-        <span key={i} className="block" style={{ overflow: "clip" }}>
+      {words.map((word, i) => (
+        <span key={i} className="inline-block overflow-clip align-top">
           <motion.span
-            className="block"
+            className="inline-block"
             initial={{ y: "100%" }}
             animate={inView ? { y: 0 } : { y: "100%" }}
             transition={{
-              duration: 1,
+              duration: 0.8,
               delay: baseDelay + i * stagger,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            {line}
+            {word}
           </motion.span>
+          {i < words.length - 1 && "\u00A0"}
         </span>
       ))}
     </p>
@@ -169,11 +167,11 @@ export function About() {
 
         {/* Right — bio + stats */}
         <div className="md:col-span-9 md:col-start-4">
-          <LineByLineReveal
-            lines={bioLines}
+          <WordByWordReveal
+            text={bioText}
             className="text-xl leading-relaxed text-foreground md:text-2xl"
             baseDelay={0.1}
-            stagger={0.12}
+            stagger={0.02}
           />
 
           {/* Stats */}
@@ -187,11 +185,12 @@ export function About() {
                   margin="-10%"
                   duration={1}
                   ease={[0.22, 1, 0.36, 1]}
+                  overflowAfter
                 >
-                  <span className="text-5xl md:text-7xl">{stat.value}</span>
-                  <sup className="relative -top-8 ml-0.5 text-xl font-semibold md:-top-9 md:text-2xl">
-                    +
-                  </sup>
+                  <span className="inline-flex items-start">
+                    <span className="text-5xl md:text-7xl">{stat.value}</span>
+                    <span className="ml-0.5 mt-0.5 text-xl font-semibold md:text-2xl">+</span>
+                  </span>
                 </Reveal>
 
                 {/* Label — fade in after number */}
