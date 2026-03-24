@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useFitText } from "@/hooks/use-fit-text";
+import { openCalPicker } from "@/hooks/use-cal";
 
 const navLinks = [
   { label: "About", href: "/#about" },
   { label: "Services", href: "/#services" },
   { label: "Portfolio", href: "/#projects" },
-  { label: "Contact", href: "https://cal.com/nadine-kares-design" },
+  { label: "Contact", href: "#cal", isCal: true },
 ];
 
 const legalLinks = [
@@ -40,15 +41,13 @@ export function Footer() {
               <ul className="mt-3 flex flex-col gap-2">
                 {navLinks.map((link) => (
                   <li key={link.href}>
-                    {link.href.startsWith("http") ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-white/70 transition-colors hover:text-white"
+                    {"isCal" in link && link.isCal ? (
+                      <button
+                        onClick={() => openCalPicker()}
+                        className="text-sm text-white/70 transition-colors hover:text-white cursor-pointer"
                       >
                         {link.label}
-                      </a>
+                      </button>
                     ) : (
                       <Link
                         href={link.href}

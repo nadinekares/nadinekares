@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { MeshGradient } from "@paper-design/shaders-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { openCalPicker } from "@/hooks/use-cal";
 
 export function Cta() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -81,15 +82,15 @@ export function Cta() {
           <h2 className="m-0 font-heading font-semibold text-white text-[clamp(2rem,8vw,8.5rem)] leading-[0.95] tracking-[-0.02em] px-6 md:px-10">
             Let&apos;s Work Together.
           </h2>
-          <a
-            href="mailto:design@nadinekares.at"
+          <button
+            onClick={() => openCalPicker()}
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "border-white/90 bg-white/10 text-white backdrop-blur-[4px] hover:border-white/90 hover:bg-white hover:text-black",
+              "border-white/90 bg-white/10 text-white backdrop-blur-[4px] hover:border-white/90 hover:bg-white hover:text-black cursor-pointer",
             )}
           >
             Get in Touch
-          </a>
+          </button>
         </div>
       </div>
     </section>

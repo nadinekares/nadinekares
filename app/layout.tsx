@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Navigation } from "@/components/navigation";
 import { IntroProvider } from "@/components/intro-provider";
 import { CookieNotice } from "@/components/cookie-notice";
+import { CalProvider } from "@/components/cal-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,9 +17,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000",
+  ),
   title: "Nadine Kares — Brand Identity & Web Design",
   description:
     "Designer specializing in brand identity and web design, based between Vienna and Zurich.",
+  openGraph: {
+    title: "Nadine Kares — Brand Identity & Web Design",
+    description:
+      "Designer specializing in brand identity and web design, based between Vienna and Zurich.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nadine Kares — Brand Identity & Web Design",
+    description:
+      "Designer specializing in brand identity and web design, based between Vienna and Zurich.",
+  },
 };
 
 export default function RootLayout({
@@ -55,6 +73,7 @@ export default function RootLayout({
           <Navigation />
           {children}
         </IntroProvider>
+        <CalProvider />
         <CookieNotice />
       </body>
     </html>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { useIntroPhase } from "@/components/intro-provider";
+import { openCalPicker } from "@/hooks/use-cal";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -130,7 +131,7 @@ function MobileMenu({
         >
           {[
             ...navLinks,
-            { label: "Contact", href: "https://cal.com/nadine-kares-design", external: true },
+            { label: "Contact", href: "#cal", isCal: true },
           ].map((link, i) => (
             <motion.div
               key={link.href}
@@ -138,16 +139,16 @@ function MobileMenu({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
             >
-              {"external" in link && link.external ? (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
+              {"isCal" in link && link.isCal ? (
+                <button
+                  onClick={() => {
+                    onClose();
+                    openCalPicker();
+                  }}
                   className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
                 >
                   {link.label}
-                </a>
+                </button>
               ) : (
                 <Link
                   href={link.href}
@@ -249,19 +250,12 @@ export function Navigation() {
         <Button
           variant={isDark ? "outline" : "default"}
           size="sm"
-          nativeButton={false}
           className={`hidden text-xs md:inline-flex ${
             !isDark
               ? "border-white/80 bg-transparent text-white hover:border-brand hover:bg-brand hover:text-white"
               : "hover:border-brand hover:bg-brand hover:text-white"
           }`}
-          render={
-            <Link
-              href="https://cal.com/nadine-kares-design"
-              target="_blank"
-              rel="noopener noreferrer"
-            />
-          }
+          onClick={() => openCalPicker()}
         >
           Let&apos;s Chat
         </Button>
