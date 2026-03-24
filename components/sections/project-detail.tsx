@@ -39,9 +39,9 @@ function LogoMarquee({ title }: { title: string }) {
       </div>
 
       {/* Marquee */}
-      <div className="flex whitespace-nowrap">
+      <div className="pointer-events-none flex select-none whitespace-nowrap">
         <motion.div
-          className="flex shrink-0"
+          className="flex shrink-0 will-change-transform"
           animate={{ x: "-50%" }}
           transition={{
             x: {
