@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { useIntroPhase } from "@/components/intro-provider";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#projects" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Portfolio", href: "/#projects" },
 ];
 
 const socialLinks = [

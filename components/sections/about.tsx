@@ -1,8 +1,9 @@
 "use client";
 
-import { type ReactNode, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { type MotionValue, motion, useInView, useScroll, useTransform } from "motion/react";
+import { Reveal } from "@/components/ui/reveal";
 
 const stats = [
   { value: "10", label: "Years of Experience" },
@@ -51,35 +52,6 @@ const aboutImages = [
     href: "https://www.bluecode.com",
   },
 ];
-
-function Reveal({
-  children,
-  delay = 0,
-  className,
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10%" });
-
-  return (
-    <div ref={ref} className={className} style={{ overflow: "clip" }}>
-      <motion.div
-        initial={{ y: "100%" }}
-        animate={inView ? { y: 0 } : { y: "100%" }}
-        transition={{
-          duration: 1,
-          delay,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
 
 function LineByLineReveal({
   lines,
@@ -164,7 +136,7 @@ function ImageCard({
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100">
         <Image
           src={img.logo}
-          alt=""
+          alt={img.alt.replace("Studio work — ", "") + " logo"}
           width={160}
           height={48}
           className={`relative z-10 w-auto max-w-[60%] brightness-0 invert drop-shadow-lg ${img.logoClass}`}
@@ -188,6 +160,9 @@ export function About() {
         <Reveal
           className="mb-8 text-xs font-normal uppercase tracking-[0.1em] text-muted-foreground font-label md:col-span-3 md:mb-0"
           delay={0}
+          margin="-10%"
+          duration={1}
+          ease={[0.22, 1, 0.36, 1]}
         >
           About
         </Reveal>
@@ -209,6 +184,9 @@ export function About() {
                 <Reveal
                   className="font-heading tracking-tight text-foreground"
                   delay={0.2 + i * 0.15}
+                  margin="-10%"
+                  duration={1}
+                  ease={[0.22, 1, 0.36, 1]}
                 >
                   <span className="text-5xl md:text-7xl">{stat.value}</span>
                   <sup className="relative -top-8 ml-0.5 text-xl font-semibold md:-top-9 md:text-2xl">

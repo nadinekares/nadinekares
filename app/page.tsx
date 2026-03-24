@@ -7,7 +7,7 @@ import { Footer } from "@/components/sections/footer";
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <About />
       <Services />

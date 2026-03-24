@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useEffect, useCallback, useState, useSyncExternalStore } from "react";
+import { useRef, useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { useIntroPhase } from "@/components/intro-provider";
+import { useFitText } from "@/hooks/use-fit-text";
 
 const LENS_SIZE_VW = 18;
 const HERO_BLUR_DATA_URL =
@@ -51,7 +52,7 @@ function Crosshair({ className = "" }: { className?: string }) {
 }
 
 export function Hero() {
-  const textRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useFitText<HTMLHeadingElement>();
   const sectionRef = useRef<HTMLElement>(null);
   const lensRef = useRef<HTMLDivElement>(null);
   const lensImgRef = useRef<HTMLDivElement>(null);
@@ -63,38 +64,6 @@ export function Hero() {
 
   const introDone = phase === "done";
   const showUI = phase === "reveal" || phase === "done";
-
-  const fitText = useCallback(() => {
-    const el = textRef.current;
-    if (!el) return;
-
-    // Read padding from CSS classes (px-6 / md:px-10) before overriding styles
-    const computed = getComputedStyle(el);
-    const padL = parseFloat(computed.paddingLeft) || 0;
-    const padR = parseFloat(computed.paddingRight) || 0;
-    const availableWidth = window.innerWidth - padL - padR;
-
-    // Measure intrinsic text width at reference size (strip padding temporarily)
-    el.style.fontSize = "100px";
-    el.style.display = "inline";
-    el.style.position = "static";
-    el.style.paddingLeft = "0";
-    el.style.paddingRight = "0";
-    const textWidth = el.getBoundingClientRect().width;
-    el.style.display = "";
-    el.style.position = "";
-    el.style.paddingLeft = "";
-    el.style.paddingRight = "";
-
-    const scale = availableWidth / textWidth;
-    el.style.fontSize = `${100 * scale}px`;
-  }, []);
-
-  useEffect(() => {
-    fitText();
-    window.addEventListener("resize", fitText);
-    return () => window.removeEventListener("resize", fitText);
-  }, [fitText]);
 
   /* ── Lens cursor logic (only after intro done) ── */
   useEffect(() => {
@@ -355,7 +324,7 @@ export function Hero() {
       {/* ── Text labels ── */}
       <div
         className="absolute inset-x-0 z-10 flex w-full justify-between px-6 font-normal tracking-[0.1em] uppercase font-label text-primary-foreground md:px-10"
-        style={{ top: "50%", fontSize: "clamp(0.625rem, 1.1vw, 1rem)" }}
+        style={{ top: "50%", fontSize: "clamp(0.75rem, 1.1vw, 1rem)" }}
       >
         {["Brands", "Websites", "Design", "Vienna / Zurich"].map((label, i) => (
           <span

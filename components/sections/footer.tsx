@@ -1,12 +1,12 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useFitText } from "@/hooks/use-fit-text";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#projects" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Portfolio", href: "/#projects" },
   { label: "Contact", href: "https://cal.com/nadine-kares-design" },
 ];
 
@@ -16,37 +16,7 @@ const legalLinks = [
 ];
 
 export function Footer() {
-  const textRef = useRef<HTMLSpanElement>(null);
-
-  const fitText = useCallback(() => {
-    const el = textRef.current;
-    if (!el) return;
-
-    const computed = getComputedStyle(el);
-    const padL = parseFloat(computed.paddingLeft) || 0;
-    const padR = parseFloat(computed.paddingRight) || 0;
-    const availableWidth = window.innerWidth - padL - padR;
-
-    el.style.fontSize = "100px";
-    el.style.display = "inline";
-    el.style.position = "static";
-    el.style.paddingLeft = "0";
-    el.style.paddingRight = "0";
-    const textWidth = el.getBoundingClientRect().width;
-    el.style.display = "";
-    el.style.position = "";
-    el.style.paddingLeft = "";
-    el.style.paddingRight = "";
-
-    const scale = availableWidth / textWidth;
-    el.style.fontSize = `${100 * scale}px`;
-  }, []);
-
-  useEffect(() => {
-    fitText();
-    window.addEventListener("resize", fitText);
-    return () => window.removeEventListener("resize", fitText);
-  }, [fitText]);
+  const textRef = useFitText<HTMLSpanElement>();
 
   return (
     <footer className="relative w-full bg-black text-white">

@@ -11,7 +11,7 @@ I take your privacy seriously and am committed to protecting your personal data 
 ## 2. Controller
 
 Nadine Kares
-hello@nadinekares.com
+design@nadinekares.com
 
 ## 3. Data Collection
 
@@ -40,11 +40,9 @@ This Website is hosted by Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 9172
 
 This Website does not use cookies for tracking or advertising purposes. Only technically necessary cookies may be used to ensure the proper functioning of the Website.
 
-## 6. Third-Party Services
+## 6. Fonts
 
-### 6.1 Google Fonts
-
-This Website uses Google Fonts for consistent typography. When you access a page, your browser loads the required fonts from Google's servers. This may result in Google receiving your IP address. For more information, see Google's privacy policy.
+This Website uses self-hosted fonts. No external font services are called at runtime, and no data is transmitted to third-party font providers when you visit this Website.
 
 ## 7. Your Rights
 
@@ -58,7 +56,7 @@ Under the GDPR, you have the following rights:
 - **Right to object** — You can object to the processing of your data.
 - **Right to withdraw consent** — You can withdraw consent at any time.
 
-To exercise any of these rights, please contact me at hello@nadinekares.com.
+To exercise any of these rights, please contact me at design@nadinekares.com.
 
 ## 8. Data Retention
 
@@ -77,4 +75,4 @@ I reserve the right to update this Privacy Policy at any time. The current versi
 If you have any questions about this Privacy Policy, please contact me at:
 
 Nadine Kares
-Email: hello@nadinekares.com
+Email: design@nadinekares.com
