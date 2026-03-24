@@ -3,33 +3,8 @@
 import { type ReactNode, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
-
-const projects = [
-  {
-    title: "Talentir",
-    category: "UX/UI Design",
-    year: "2025",
-    image: "/images/projects/talentir.jpg",
-  },
-  {
-    title: "Hotelpartner Booking Engine",
-    category: "Digital Product Design",
-    year: "2024",
-    image: "/images/projects/hotelpartner-booking.jpeg",
-  },
-  {
-    title: "Janet Brantschen",
-    category: "Branding & Webflow",
-    year: "2025",
-    image: "/images/projects/janet-brantschen.jpeg",
-  },
-  {
-    title: "VVO Event Logo & Print",
-    category: "Branding & Print",
-    year: "2024",
-    image: "/images/projects/vvo-125.jpeg",
-  },
-];
+import Link from "next/link";
+import { projects } from "@/lib/projects";
 
 function Reveal({
   children,
@@ -63,7 +38,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
   return (
     <motion.div
       ref={ref}
-      className="group cursor-pointer"
+      className="group"
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{
@@ -72,27 +47,31 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
         ease: [0.16, 1, 0.3, 1],
       }}
     >
-      {/* Image */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-muted">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      </div>
+      <Link href={`/projects/${project.slug}`} className="block cursor-pointer">
+        {/* Image */}
+        <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+          <Image
+            src={project.thumbnail}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
 
-      {/* Info */}
-      <div className="mt-4 flex items-baseline justify-between">
-        <h3 className="font-heading text-lg tracking-tight text-foreground md:text-xl">
-          {project.title}
-        </h3>
-        <span className="text-xs font-normal font-label text-muted-foreground">{project.year}</span>
-      </div>
-      <p className="mt-1 text-xs font-label uppercase tracking-[0.1em] text-muted-foreground">
-        {project.category}
-      </p>
+        {/* Info */}
+        <div className="mt-4 flex items-baseline justify-between">
+          <h3 className="font-heading text-lg tracking-tight text-foreground md:text-xl">
+            {project.title}
+          </h3>
+          <span className="text-xs font-normal font-label text-muted-foreground">
+            {project.year}
+          </span>
+        </div>
+        <p className="mt-1 text-xs font-label uppercase tracking-[0.1em] text-muted-foreground">
+          {project.category}
+        </p>
+      </Link>
     </motion.div>
   );
 }
@@ -123,7 +102,7 @@ export function Projects() {
       {/* Project grid */}
       <div className="mt-12 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-x-8 md:gap-y-16">
         {projects.map((project, i) => (
-          <ProjectCard key={project.title} project={project} index={i} />
+          <ProjectCard key={project.slug} project={project} index={i} />
         ))}
       </div>
     </section>
