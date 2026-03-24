@@ -55,7 +55,7 @@ function LogoMarquee({ title }: { title: string }) {
           {items.map((_, i) => (
             <span
               key={i}
-              className="mx-6 font-heading text-[6rem] leading-none tracking-tight text-foreground md:mx-12 md:text-[12rem] lg:text-[16rem]"
+              className="mx-4 font-heading text-[3.5rem] leading-none tracking-tight text-foreground sm:text-[5rem] md:mx-12 md:text-[12rem] lg:text-[16rem]"
             >
               {title}
             </span>

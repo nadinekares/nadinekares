@@ -78,7 +78,7 @@ export function Cta() {
             transform: `translateY(${textTranslateY}vh) scale(${textScale})`,
           }}
         >
-          <h2 className="m-0 font-heading font-semibold text-white text-[clamp(2.5rem,10vw,8.5rem)] leading-[0.95] tracking-[-0.02em]">
+          <h2 className="m-0 font-heading font-semibold text-white text-[clamp(2rem,8vw,8.5rem)] leading-[0.95] tracking-[-0.02em] px-6 md:px-10">
             Let&apos;s Work Together.
           </h2>
           <a

@@ -111,6 +111,73 @@ function useScrollDirection() {
   return hidden;
 }
 
+function MobileMenu({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute left-0 top-0 z-40 flex h-dvh w-screen flex-col items-center justify-center gap-8 bg-primary md:hidden"
+        >
+          {[
+            ...navLinks,
+            { label: "Contact", href: "https://cal.com/nadine-kares-design", external: true },
+          ].map((link, i) => (
+            <motion.div
+              key={link.href}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
+            >
+              {"external" in link && link.external ? (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={onClose}
+                  className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  href={link.href}
+                  onClick={onClose}
+                  className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
+                >
+                  {link.label}
+                </Link>
+              )}
+            </motion.div>
+          ))}
+          <div className="mt-8 flex gap-6 border-t border-primary-foreground/20 pt-8">
+            {socialLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const phase = useIntroPhase();
@@ -225,62 +292,7 @@ export function Navigation() {
       </nav>
 
       {/* Mobile menu overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-primary md:hidden"
-          >
-            {[
-              ...navLinks,
-              { label: "Contact", href: "https://cal.com/nadine-kares-design", external: true },
-            ].map((link, i) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 + i * 0.05, duration: 0.3 }}
-              >
-                {"external" in link && link.external ? (
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsOpen(false)}
-                    className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-2xl font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                )}
-              </motion.div>
-            ))}
-            <div className="mt-8 flex gap-6 border-t border-primary-foreground/20 pt-8">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary-foreground/70 transition-colors hover:text-primary-foreground"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </header>
   );
 }
