@@ -135,14 +135,19 @@ function ImageCard({
         ease: [0.16, 1, 0.3, 1],
       }}
     >
-      {/* Image with heavy scale + blur on hover */}
-      <Image
-        src={img.src}
-        alt={img.alt}
-        fill
-        className="object-cover transition-[filter] duration-[1200ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:blur-[3px] group-hover:animate-slow-zoom"
-        sizes="(max-width: 768px) 50vw, 25vw"
-      />
+      {/* Image wrapper — sized to final ratio so the container only reveals (no zoom) */}
+      <div
+        className="absolute inset-x-0 bottom-0 w-full"
+        style={{ aspectRatio: isDesktop ? endRatio : MOBILE_RATIO }}
+      >
+        <Image
+          src={img.src}
+          alt={img.alt}
+          fill
+          className="object-cover transition-[filter] duration-[1200ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:blur-[3px] group-hover:animate-slow-zoom"
+          sizes="(max-width: 768px) 50vw, 25vw"
+        />
+      </div>
 
       {/* Dark overlay on hover */}
       <div className="pointer-events-none absolute inset-0 bg-black/0 transition-[background] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-black/30" />
