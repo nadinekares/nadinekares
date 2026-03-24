@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 import type { Project } from "@/lib/projects";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -66,32 +67,44 @@ function LogoMarquee({ title }: { title: string }) {
   );
 }
 
+/* ─── Parallax Image Card ─────────────────────────────────── */
+
+function ParallaxImage({ src, alt }: { src: string; alt: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Inner image: parallax shift
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
+  return (
+    <motion.div
+      ref={ref}
+      className="relative aspect-[4/5] w-full overflow-hidden rounded-sm"
+    >
+      <motion.div className="absolute inset-[-20%]" style={{ y }}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 55vw"
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
 /* ─── Image Scroll Column ─────────────────────────────────── */
 
 function ImageScroll({ images, title }: { images: string[]; title: string }) {
   return (
-    <div className="flex flex-col gap-4 md:gap-6">
+    <div className="flex flex-col gap-2 md:gap-3">
       {images.map((src, i) => (
-        <motion.div
-          key={src}
-          className="relative aspect-[4/5] w-full overflow-hidden bg-muted"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{
-            duration: 0.8,
-            delay: i * 0.1,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-          <Image
-            src={src}
-            alt={`${title} — ${i + 1}`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 55vw"
-          />
-        </motion.div>
+        <ParallaxImage key={src} src={src} alt={`${title} — ${i + 1}`} />
       ))}
     </div>
   );
