@@ -6,28 +6,28 @@ import Image from "next/image";
 
 const projects = [
   {
-    title: "Aura Wellness",
-    category: "Brand Identity",
+    title: "Talentir",
+    category: "UX/UI Design",
     year: "2025",
-    image: "/images/projects/project-1.jpg",
+    image: "/images/projects/talentir.jpg",
   },
   {
-    title: "Velta Studio",
-    category: "Web Design",
+    title: "Hotelpartner Booking Engine",
+    category: "Digital Product Design",
+    year: "2024",
+    image: "/images/projects/hotelpartner-booking.jpeg",
+  },
+  {
+    title: "Janet Brantschen",
+    category: "Branding & Webflow",
     year: "2025",
-    image: "/images/projects/project-2.jpg",
+    image: "/images/projects/janet-brantschen.jpeg",
   },
   {
-    title: "Maison Noire",
-    category: "Creative Direction",
+    title: "VVO Event Logo & Print",
+    category: "Branding & Print",
     year: "2024",
-    image: "/images/projects/project-3.jpg",
-  },
-  {
-    title: "Solara",
-    category: "Identity & Web",
-    year: "2024",
-    image: "/images/projects/project-4.jpg",
+    image: "/images/projects/vvo-125.jpeg",
   },
 ];
 
