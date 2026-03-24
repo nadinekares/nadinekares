@@ -6,7 +6,9 @@ import { useCallback, useEffect, useRef } from "react";
  * Scales a text element's font-size so it fills the viewport width
  * (minus its own CSS padding). Attach the returned ref to the element.
  */
-export function useFitText<T extends HTMLElement = HTMLElement>() {
+export function useFitText<T extends HTMLElement = HTMLElement>(
+  scaleFactor = 1,
+) {
   const ref = useRef<T>(null);
 
   const fit = useCallback(() => {
@@ -30,8 +32,8 @@ export function useFitText<T extends HTMLElement = HTMLElement>() {
     el.style.paddingRight = "";
 
     const scale = availableWidth / textWidth;
-    el.style.fontSize = `${100 * scale}px`;
-  }, []);
+    el.style.fontSize = `${100 * scale * scaleFactor}px`;
+  }, [scaleFactor]);
 
   useEffect(() => {
     fit();

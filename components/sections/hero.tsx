@@ -53,6 +53,7 @@ function Crosshair({ className = "" }: { className?: string }) {
 
 export function Hero() {
   const textRef = useFitText<HTMLHeadingElement>();
+  const mobileTextRef = useFitText<HTMLHeadingElement>(0.97);
   const sectionRef = useRef<HTMLElement>(null);
   const lensRef = useRef<HTMLDivElement>(null);
   const lensImgRef = useRef<HTMLDivElement>(null);
@@ -321,9 +322,9 @@ export function Hero() {
         </div>
       )}
 
-      {/* ── Text labels ── */}
+      {/* ── Text labels (desktop only) ── */}
       <div
-        className="absolute inset-x-0 z-10 flex w-full justify-between px-6 font-normal tracking-[0.1em] uppercase font-label text-primary-foreground md:px-10"
+        className="absolute inset-x-0 z-10 hidden w-full justify-between px-6 font-normal tracking-[0.1em] uppercase font-label text-primary-foreground md:flex md:px-10"
         style={{ top: "50%", fontSize: "clamp(0.75rem, 1.1vw, 1rem)" }}
       >
         {["Brands", "Websites", "Design", "Vienna / Zurich"].map((label, i) => (
@@ -343,10 +344,10 @@ export function Hero() {
         ))}
       </div>
 
-      {/* ── Name overlay ── */}
+      {/* ── Name overlay (desktop) ── */}
       <h1
         ref={textRef}
-        className="absolute inset-x-0 bottom-0 z-10 w-full whitespace-nowrap px-6 font-heading leading-[0.8] tracking-tight text-primary-foreground md:px-10"
+        className="absolute inset-x-0 bottom-0 z-10 hidden w-full whitespace-nowrap px-6 font-heading leading-[0.8] tracking-tight text-primary-foreground md:block md:px-10"
         style={{
           textIndent: "-0.07em",
           opacity: showUI ? 1 : 0,
@@ -359,6 +360,47 @@ export function Hero() {
       >
         Nadine Kares
       </h1>
+
+      {/* ── Mobile: stacked name + tagline ── */}
+      <div
+        className="absolute inset-x-0 bottom-0 z-10 pb-6 md:hidden"
+        style={{
+          opacity: showUI ? 1 : 0,
+          transform: showUI ? "translateY(0)" : "translateY(40px)",
+          transitionProperty: "opacity, transform",
+          transitionDuration: "0.8s",
+          transitionTimingFunction: "ease-out",
+          transitionDelay: showUI ? "300ms" : "0ms",
+        }}
+      >
+        <h1
+          ref={mobileTextRef}
+          className="w-full overflow-hidden px-6 font-heading leading-[0.85] tracking-tight text-primary-foreground"
+          style={{ textIndent: "-0.07em" }}
+        >
+          Nadine<br />Kares
+        </h1>
+        <div
+          className="mt-4 flex flex-wrap gap-x-4 gap-y-1 px-6 font-normal tracking-[0.1em] uppercase font-label text-primary-foreground"
+          style={{ fontSize: "clamp(0.7rem, 2.8vw, 0.85rem)" }}
+        >
+          {["Brands", "Websites", "Design", "Vienna / Zurich"].map((label, i) => (
+            <span
+              key={label}
+              style={{
+                opacity: showUI ? 1 : 0,
+                transform: showUI ? "translateY(0)" : "translateY(8px)",
+                transitionProperty: "opacity, transform",
+                transitionDuration: "0.5s",
+                transitionTimingFunction: "ease-out",
+                transitionDelay: showUI ? `${400 + i * 80}ms` : "0ms",
+              }}
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
