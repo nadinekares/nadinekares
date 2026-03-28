@@ -28,14 +28,14 @@ export default function PricingPage() {
             Choose the plan that fits your needs. Each plan includes hosting,
             maintenance, and ongoing support for your website.
           </p>
+        </div>
 
-          <div className="mt-16">
-            {/* @ts-expect-error - Stripe custom element */}
-            <stripe-pricing-table
-              pricing-table-id="prctbl_1TFxD7J9I0o75Ux37mucIVW6"
-              publishable-key="pk_live_51TBtVGJ9I0o75Ux3p3hgGcKsZ768SP67rNlCX0iDP1nHUo6Jm6mwxmUl3srKk9HyIjLMYDMktDlMWmzGWGBXanP700fI0EZgZf"
-            />
-          </div>
+        <div className="mx-auto mt-16 max-w-7xl">
+          {/* @ts-expect-error - Stripe custom element */}
+          <stripe-pricing-table
+            pricing-table-id="prctbl_1TFxD7J9I0o75Ux37mucIVW6"
+            publishable-key="pk_live_51TBtVGJ9I0o75Ux3p3hgGcKsZ768SP67rNlCX0iDP1nHUo6Jm6mwxmUl3srKk9HyIjLMYDMktDlMWmzGWGBXanP700fI0EZgZf"
+          />
         </div>
       </main>
     </>
